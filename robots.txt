@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Host
+Host: https://powersolutionsservices.in
+
+# Sitemaps
+Sitemap: https://powersolutionsservices.in/sitemap.xml

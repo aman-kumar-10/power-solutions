@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://powersolutionsservices.in/</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://powersolutionsservices.in/assets/images/banner1.webp</image:loc>
+      <image:title>Power Solutions - Professional Electrical Solutions LT and HT Works</image:title>
+      <image:caption>High tension and low tension electrical installation in Punjab</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://powersolutionsservices.in/assets/images/banner2.webp</image:loc>
+      <image:title>Authorized Dealer of Premium Electrical Brands</image:title>
+      <image:caption>Authorized distributor of ABB, Schneider, Havells, L&amp;T, Siemens, Polycab</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://powersolutionsservices.in/assets/images/project1.webp</image:loc>
+      <image:title>Industrial Electrical Control Panel Installation</image:title>
+      <image:caption>Custom LT control panel setup for manufacturing units</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://powersolutionsservices.in/assets/images/project2.webp</image:loc>
+      <image:title>Commercial Complex Electrical Wiring</image:title>
+      <image:caption>Commercial building electrical distribution systems</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://powersolutionsservices.in/assets/images/project3.webp</image:loc>
+      <image:title>Municipal Street Lighting Infrastructure</image:title>
+      <image:caption>GI octagonal poles and LED lighting installations</image:caption>
+    </image:image>
+  </url>
+</urlset>
