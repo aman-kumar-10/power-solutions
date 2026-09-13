@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Power Solutions - Grand Opening Invitation (Executive Celebration Gala)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      width: 1200px;
+      height: 1600px;
+      background: #081D13;
+      color: #0c1811;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px;
+      position: relative;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Ambient Festive Radial Glows */
+    .bg-celebration-canvas {
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(circle at 50% 10%, rgba(212, 175, 55, 0.25) 0%, transparent 50%),
+        radial-gradient(circle at 10% 90%, rgba(14, 121, 60, 0.3) 0%, transparent 45%),
+        radial-gradient(circle at 90% 90%, rgba(212, 175, 55, 0.2) 0%, transparent 45%),
+        linear-gradient(180deg, #0A261A 0%, #05140D 100%);
+      z-index: 1;
+    }
+
+    /* Confetti / Starburst SVG vector */
+    .festive-sparkles {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      opacity: 0.25;
+      pointer-events: none;
+    }
+
+    /* Outer Gala Parchment Container */
+    .gala-container {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, #FAF8F2 0%, #FFFFFF 40%, #F5F1E8 100%);
+      border: 3px solid #D4AF37;
+      border-radius: 26px;
+      padding: 55px 65px 45px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      text-align: center;
+      box-shadow: 
+        0 30px 80px rgba(0, 0, 0, 0.6),
+        0 0 50px rgba(212, 175, 55, 0.3),
+        inset 0 0 0 8px #FAF8F2,
+        inset 0 0 0 11px #024F16,
+        inset 0 0 0 13px #D4AF37;
+    }
+
+    /* Festive Top Ribbon Banner */
+    .gala-ribbon {
+      position: relative;
+      background: linear-gradient(135deg, #024F16 0%, #0D692D 50%, #024F16 100%);
+      color: #FFFFFF;
+      padding: 10px 48px;
+      border-radius: 4px;
+      box-shadow: 0 8px 24px rgba(2, 79, 22, 0.35);
+      border-top: 2px solid #D4AF37;
+      border-bottom: 2px solid #D4AF37;
+      margin-bottom: 20px;
+    }
+    .ribbon-text {
+      font-family: 'Cinzel', serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.32em;
+      color: #F8E298;
+      text-transform: uppercase;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+    /* Logo & Laurel Section */
+    .laurel-shield {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+    .laurel-svg {
+      position: absolute;
+      width: 240px;
+      height: 120px;
+      pointer-events: none;
+    }
+    .logo-inner {
+      padding: 8px 24px;
+      position: relative;
+      z-index: 5;
+    }
+    .logo-inner img {
+      height: 74px;
+      width: auto;
+    }
+
+    .contractor-cred-line {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: #024F16;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+    .contractor-cred-line::before, .contractor-cred-line::after {
+      content: '';
+      width: 44px;
+      height: 1.5px;
+      background: #D4AF37;
+    }
+
+    /* Typography */
+    .welcoming-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-style: italic;
+      font-weight: 600;
+      color: #927018;
+      margin-bottom: 10px;
+    }
+    .ceremony-main-title {
+      font-family: 'Cinzel', serif;
+      font-size: 56px;
+      font-weight: 900;
+      line-height: 1.15;
+      color: #024F16;
+      letter-spacing: 0.01em;
+      margin-bottom: 16px;
+    }
+    .inaugural-subtitle {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #12301A;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .welcoming-passage {
+      max-width: 880px;
+      font-size: 20px;
+      line-height: 1.7;
+      color: #2D3E33;
+      margin-bottom: 34px;
+    }
+    .welcoming-passage strong {
+      color: #024F16;
+      font-weight: 700;
+    }
+
+    /* Festive Event Highlights Box */
+    .festive-details-card {
+      width: 100%;
+      max-width: 960px;
+      background: #FFFFFF;
+      border: 2px solid #D4AF37;
+      border-radius: 18px;
+      padding: 26px 36px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.35fr;
+      gap: 20px;
+      align-items: center;
+      margin-bottom: 30px;
+      box-shadow: 0 12px 32px rgba(2, 79, 22, 0.08);
+    }
+    .festive-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .festive-col:not(:last-child) {
+      border-right: 1.5px solid rgba(212, 175, 55, 0.4);
+      padding-right: 20px;
+    }
+    .col-header-text {
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      color: #927018;
+      text-transform: uppercase;
+    }
+    .col-data-text {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: #024F16;
+      line-height: 1.2;
+    }
+    .lunch-highlight-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #024F16 0%, #0E793C 100%);
+      color: #FFFFFF;
+      padding: 9px 20px;
+      border-radius: 30px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      box-shadow: 0 4px 14px rgba(2, 79, 22, 0.25);
+      border: 1px solid #D4AF37;
+    }
+
+    /* Venue Box */
+    .venue-ornate-box {
+      width: 100%;
+      max-width: 960px;
+      background: linear-gradient(135deg, #F5F9F6 0%, #FFFFFF 100%);
+      border: 1.5px solid #024F16;
+      border-radius: 14px;
+      padding: 22px 34px;
+      margin-bottom: 30px;
+      box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0.4);
+    }
+    .venue-title-sub {
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      color: #927018;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .venue-full-address {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 21px;
+      font-weight: 700;
+      color: #0c1811;
+      line-height: 1.35;
+    }
+
+    /* Footer RSVP */
+    .gala-footer {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding-top: 22px;
+      border-top: 1.5px solid rgba(2, 79, 22, 0.18);
+    }
+    .gala-rsvp {
+      text-align: left;
+    }
+    .gala-rsvp-tag {
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: #927018;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+    .gala-phones {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 19px;
+      font-weight: 800;
+      color: #024F16;
+    }
+    .gala-email {
+      font-size: 15px;
+      color: #4A5B50;
+      margin-top: 4px;
+    }
+    .gala-compliance {
+      text-align: right;
+    }
+    .compliance-info {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: #4A5B50;
+      line-height: 1.6;
+    }
+    .compliance-info b {
+      color: #024F16;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-celebration-canvas"></div>
+
+  <!-- Festive Sparkle & Burst Vectors -->
+  <svg class="festive-sparkles" viewBox="0 0 1200 1600">
+    <g fill="#D4AF37">
+      <circle cx="150" cy="180" r="4" />
+      <circle cx="220" cy="120" r="3" />
+      <circle cx="1050" cy="180" r="4" />
+      <circle cx="980" cy="120" r="3" />
+      <polygon points="120,280 123,288 131,291 123,294 120,302 117,294 109,291 117,288" />
+      <polygon points="1080,280 1083,288 1091,291 1083,294 1080,302 1077,294 1069,291 1077,288" />
+      <circle cx="160" cy="1420" r="4" />
+      <circle cx="1040" cy="1420" r="4" />
+    </g>
+  </svg>
+
+  <div class="gala-container">
+    <!-- Top Header & Laurel -->
+    <div>
+      <div class="gala-ribbon">
+        <span class="ribbon-text">✨ Warmest Welcome & Cordial Invitation ✨</span>
+      </div>
+
+      <div class="laurel-shield">
+        <!-- Laurel Wreath SVG Vector -->
+        <svg class="laurel-svg" viewBox="0 0 300 140" fill="none">
+          <path d="M 50 110 C 20 80 20 40 60 20 C 50 40 60 70 80 90" stroke="#D4AF37" stroke-width="2" />
+          <path d="M 250 110 C 280 80 280 40 240 20 C 250 40 240 70 220 90" stroke="#D4AF37" stroke-width="2" />
+          <circle cx="150" cy="15" r="5" fill="#D4AF37" />
+        </svg>
+
+        <div class="logo-inner">
+          <img src="../assets/images/logo.svg" alt="Power Solutions Logo">
+        </div>
+      </div>
+
+      <div class="contractor-cred-line">
+        Class "A" Licensed Electrical Contractor • Punjab Govt. Approved
+      </div>
+    </div>
+
+    <!-- Main Typography & Greetings -->
+    <div>
+      <div class="welcoming-heading">A Warm Welcome to Our Respected Guests & Well-Wishers</div>
+      <h1 class="ceremony-main-title">Grand Opening Ceremony</h1>
+      <div class="inaugural-subtitle">Inaugurating Our Modern Corporate Office & Engineering Works</div>
+
+      <p class="welcoming-passage">
+        We cordially invite you to celebrate with us as <strong>Power Solutions</strong> inaugurates its newly expanded headquarters in Mohali. Your valued presence and blessings will make our grand opening ceremony truly special and unforgettable.
+      </p>
+    </div>
+
+    <!-- Festive Timing & Lunch Schedule -->
+    <div class="festive-details-card">
+      <div class="festive-col">
+        <span class="col-header-text">Inauguration Date</span>
+        <span class="col-data-text">Monday, 14 Sept 2026</span>
+      </div>
+      <div class="festive-col">
+        <span class="col-header-text">Ceremony Timing</span>
+        <span class="col-data-text">4:00 PM Onwards</span>
+      </div>
+      <div class="festive-col">
+        <span class="col-header-text">Hospitality</span>
+        <div class="lunch-highlight-badge">
+          <span>🍽️ Followed by Celebration Lunch</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Venue Box -->
+    <div class="venue-ornate-box">
+      <div class="venue-title-sub">Inauguration Venue Address</div>
+      <div class="venue-full-address">
+        Office no 12A, Plot no E 45, Phase 8 Industrial Area, Mohali, Punjab
+      </div>
+    </div>
+
+    <!-- Footer Bar -->
+    <div class="gala-footer">
+      <div class="gala-rsvp">
+        <div class="gala-rsvp-tag">Warm Welcome & RSVP</div>
+        <div class="gala-phones">+91 6283027340 &nbsp;•&nbsp; +91 8968972704 &nbsp;•&nbsp; +91 95016 24342</div>
+        <div class="gala-email">Email: powersolutions@zohomail.in &nbsp;|&nbsp; Web: powersolutionsservices.in</div>
+      </div>
+      <div class="gala-compliance">
+        <div class="compliance-info">
+          MSME UDYAM: <b>UDYAM-PB-20-0103957</b><br>
+          GSTIN: <b>03BFVPT8691B1ZB</b>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

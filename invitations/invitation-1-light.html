@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Power Solutions - Grand Opening Invitation (Light Theme)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      width: 1200px;
+      height: 1600px;
+      background: #F8FAF9;
+      color: #0c1610;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px;
+      position: relative;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    .canvas-bg {
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(circle at 10% 15%, rgba(14, 121, 60, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 85%, rgba(212, 175, 55, 0.1) 0%, transparent 45%),
+        linear-gradient(180deg, #FFFFFF 0%, #F3F8F5 100%);
+      z-index: 1;
+    }
+    .circuit-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      stroke: rgba(14, 121, 60, 0.12);
+      stroke-width: 1.5;
+      fill: none;
+      z-index: 2;
+    }
+    .invitation-card {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      height: 100%;
+      background: #FFFFFF;
+      border: 3px solid #024F16;
+      border-radius: 20px;
+      padding: 56px 64px 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      text-align: center;
+      box-shadow: 
+        0 25px 60px rgba(2, 79, 22, 0.12),
+        inset 0 0 0 8px rgba(212, 175, 55, 0.25),
+        inset 0 0 0 10px #024F16;
+    }
+    .corner-ornament {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      border: 3px solid #D4AF37;
+      z-index: 15;
+    }
+    .corner-tl { top: 18px; left: 18px; border-right: none; border-bottom: none; }
+    .corner-tr { top: 18px; right: 18px; border-left: none; border-bottom: none; }
+    .corner-bl { bottom: 18px; left: 18px; border-right: none; border-top: none; }
+    .corner-br { bottom: 18px; right: 18px; border-left: none; border-top: none; }
+
+    .top-ribbon {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 24px;
+      background: rgba(2, 79, 22, 0.06);
+      border: 1.5px solid rgba(212, 175, 55, 0.6);
+      border-radius: 40px;
+      font-family: 'Cinzel', serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      color: #024F16;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .logo-container {
+      margin-bottom: 24px;
+    }
+    .logo-container img {
+      height: 72px;
+      width: auto;
+    }
+
+    .accreditation {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: #0E793C;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .accreditation::before, .accreditation::after {
+      content: '';
+      width: 40px;
+      height: 1.5px;
+      background: #D4AF37;
+    }
+
+    .invitation-kicker {
+      font-family: 'Cinzel', serif;
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      color: #8D6E18;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .main-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 58px;
+      font-weight: 800;
+      line-height: 1.15;
+      color: #024F16;
+      margin-bottom: 16px;
+      letter-spacing: -0.01em;
+    }
+    .subtitle-badge {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #12301A;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .welcome-text {
+      max-width: 860px;
+      font-size: 20px;
+      line-height: 1.7;
+      color: #334439;
+      margin-bottom: 36px;
+    }
+    .welcome-text strong {
+      color: #024F16;
+      font-weight: 700;
+    }
+
+    .event-details-card {
+      width: 100%;
+      max-width: 960px;
+      background: linear-gradient(135deg, #F0F7F2 0%, #FFFFFF 100%);
+      border: 2px solid #D4AF37;
+      border-radius: 16px;
+      padding: 28px 36px;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1.3fr;
+      gap: 20px;
+      align-items: center;
+      margin-bottom: 32px;
+      box-shadow: 0 12px 30px rgba(2, 79, 22, 0.06);
+    }
+    .event-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .event-item:not(:last-child) {
+      border-right: 1.5px solid rgba(212, 175, 55, 0.4);
+      padding-right: 20px;
+    }
+    .event-label {
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      color: #8D6E18;
+      text-transform: uppercase;
+    }
+    .event-val {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: #024F16;
+      line-height: 1.2;
+    }
+    .lunch-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #024F16 0%, #0E793C 100%);
+      color: #FFFFFF;
+      padding: 8px 18px;
+      border-radius: 30px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      box-shadow: 0 4px 12px rgba(2, 79, 22, 0.3);
+    }
+
+    .venue-box {
+      width: 100%;
+      max-width: 960px;
+      background: #FFFFFF;
+      border: 1.5px dashed rgba(2, 79, 22, 0.35);
+      border-radius: 12px;
+      padding: 22px 32px;
+      margin-bottom: 32px;
+    }
+    .venue-title {
+      font-family: 'Cinzel', serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: #8D6E18;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .venue-address {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 21px;
+      font-weight: 700;
+      color: #0c1610;
+      line-height: 1.4;
+    }
+
+    .footer-rsvp {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding-top: 24px;
+      border-top: 1.5px solid rgba(2, 79, 22, 0.15);
+    }
+    .rsvp-col {
+      text-align: left;
+    }
+    .rsvp-title {
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: #8D6E18;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .rsvp-phones {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #024F16;
+    }
+    .rsvp-email {
+      font-size: 15px;
+      color: #475569;
+      margin-top: 3px;
+    }
+    .compliance-col {
+      text-align: right;
+    }
+    .compliance-pills {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: #475569;
+      line-height: 1.5;
+    }
+    .compliance-highlight {
+      color: #024F16;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas-bg"></div>
+
+  <svg class="circuit-bg" viewBox="0 0 1200 1600">
+    <path d="M 60 120 L 60 300 L 140 380 L 140 500" />
+    <circle cx="140" cy="500" r="4" fill="#0E793C" />
+    <path d="M 1140 120 L 1140 300 L 1060 380 L 1060 500" />
+    <circle cx="1060" cy="500" r="4" fill="#0E793C" />
+    <path d="M 60 1480 L 60 1300 L 140 1220 L 140 1100" />
+    <circle cx="140" cy="1100" r="4" fill="#D4AF37" />
+    <path d="M 1140 1480 L 1140 1300 L 1060 1220 L 1060 1100" />
+    <circle cx="1060" cy="1100" r="4" fill="#D4AF37" />
+  </svg>
+
+  <div class="invitation-card">
+    <div class="corner-ornament corner-tl"></div>
+    <div class="corner-ornament corner-tr"></div>
+    <div class="corner-ornament corner-bl"></div>
+    <div class="corner-ornament corner-br"></div>
+
+    <!-- Header Block -->
+    <div>
+      <div class="top-ribbon">
+        <span>✨ Cordial Invitation ✨</span>
+      </div>
+
+      <div class="logo-container">
+        <img src="../assets/images/logo.svg" alt="Power Solutions Logo">
+      </div>
+
+      <div class="accreditation">
+        Class "A" Licensed Electrical Contractor • Govt. of Punjab Certified
+      </div>
+    </div>
+
+    <!-- Title Block -->
+    <div>
+      <div class="invitation-kicker">You Are Cordially Invited To The</div>
+      <h1 class="main-title">Grand Opening Ceremony</h1>
+      <div class="subtitle-badge">Of Our New Corporate Headquarters & Engineering Works</div>
+
+      <p class="welcome-text">
+        With immense joy and gratitude, <strong>Power Solutions</strong> requests the esteemed honor of your presence to celebrate the grand inauguration of our newly expanded facility. Join us as we inaugurate this milestone in engineering precision and customer dedication.
+      </p>
+    </div>
+
+    <!-- Details Block -->
+    <div class="event-details-card">
+      <div class="event-item">
+        <span class="event-label">Inauguration Date</span>
+        <span class="event-val">Monday, 14th Sept 2026</span>
+      </div>
+      <div class="event-item">
+        <span class="event-label">Ceremony Timing</span>
+        <span class="event-val">4:00 PM Onwards</span>
+      </div>
+      <div class="event-item">
+        <span class="event-label">Hospitality</span>
+        <div class="lunch-pill">
+          <span>🍽️ Followed by Celebration Lunch</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Venue Block -->
+    <div class="venue-box">
+      <div class="venue-title">Facility & Office Location</div>
+      <div class="venue-address">
+        Office no 12A, Plot no E 45, Phase 8 Industrial Area, Mohali, Punjab
+      </div>
+    </div>
+
+    <!-- Footer RSVP -->
+    <div class="footer-rsvp">
+      <div class="rsvp-col">
+        <div class="rsvp-title">RSVP & Inquiries</div>
+        <div class="rsvp-phones">+91 6283027340 &nbsp;•&nbsp; +91 8968972704 &nbsp;•&nbsp; +91 95016 24342</div>
+        <div class="rsvp-email">Email: powersolutions@zohomail.in &nbsp;|&nbsp; Web: powersolutionsservices.in</div>
+      </div>
+      <div class="compliance-col">
+        <div class="compliance-pills">
+          UDYAM: <span class="compliance-highlight">UDYAM-PB-20-0103957</span><br>
+          GSTIN: <span class="compliance-highlight">03BFVPT8691B1ZB</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

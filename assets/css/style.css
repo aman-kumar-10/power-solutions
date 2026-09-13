@@ -81,9 +81,9 @@
   --hero-bg: #f4f8f5;
   --hero-mesh-1: rgba(14, 121, 60, 0.12);
   --hero-mesh-2: rgba(16, 185, 129, 0.08);
-  --hero-overlay: linear-gradient(180deg, rgba(244, 248, 245, 0.9) 0%, rgba(244, 248, 245, 0.8) 50%, rgba(244, 248, 245, 0.98) 100%);
+  --hero-overlay: linear-gradient(180deg, rgb(244 248 245 / 38%) 0%, rgb(244 248 245 / 41%) 50%, rgb(244 248 245 / 44%) 100%);
   --hero-title-color: #0c1610;
-  --hero-desc-color: #475569;
+  --hero-desc-color: #fff;
   --hero-chip-bg: rgba(255, 255, 255, 0.92);
   --hero-chip-border: rgba(2, 79, 22, 0.15);
   --hero-chip-text: #0c1610;
@@ -192,7 +192,7 @@
   --hero-bg: #060c08;
   --hero-mesh-1: rgba(14, 121, 60, 0.35);
   --hero-mesh-2: rgba(16, 185, 129, 0.15);
-  --hero-overlay: linear-gradient(180deg, rgba(6, 12, 8, 0.75) 0%, rgba(6, 12, 8, 0.5) 45%, rgba(6, 12, 8, 0.96) 100%);
+  --hero-overlay: linear-gradient(180deg, rgba(6, 12, 8, 0.453) 0%, rgba(6, 12, 8, 0.305) 45%, rgba(6, 12, 8, 0.404) 100%);
   --hero-title-color: #ffffff;
   --hero-desc-color: #94a3b8;
   --hero-chip-bg: rgba(13, 26, 16, 0.85);
@@ -1372,11 +1372,15 @@ button {
 }
 
 .hero-description {
-  font-size: 1.15rem;
-  line-height: 1.75;
-  color: var(--hero-desc-color);
-  margin-bottom: 2.5rem;
-  max-width: 680px;
+    font-size: 1.15rem;
+    line-height: 1.75;
+    color: var(--hero-desc-color);
+    margin-bottom: 2.5rem;
+    max-width: 680px;
+    background: rgba(16, 185, 129, 0.12);
+    border-radius: 10px;
+    padding: 0px 0px 0px 12px;
+    border: 1px solid rgba(16, 185, 129, 0.4);
 }
 
 .hero-buttons {
@@ -3824,7 +3828,7 @@ button {
   position: relative;
   z-index: 1002;
   width: 100%;
-  max-width: 620px;
+  max-width: 660px;
   margin: auto;
 }
 
@@ -3832,35 +3836,187 @@ button {
   background: var(--surface-card);
   border: 2px solid var(--border-accent);
   border-radius: var(--radius-xl);
-  padding: 2.75rem 2.25rem 2.25rem;
+  padding: 3rem 2.25rem 2.25rem;
   position: relative;
-  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35), 0 0 45px rgba(16, 185, 129, 0.25);
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.45), 0 0 55px rgba(16, 185, 129, 0.3), 0 0 20px rgba(245, 158, 11, 0.2);
   text-align: center;
   color: var(--text-main);
   transform: scale(0.92) translateY(20px);
   transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-  overflow: hidden;
+  overflow: visible; /* Allows celebration vectors to spread outside card */
 }
 
 [data-theme="dark"] .opening-modal-card {
-  background: #09130c;
-  border-color: rgba(16, 185, 129, 0.5);
-  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.85), 0 0 50px rgba(16, 185, 129, 0.35);
+  background: #08140c;
+  border-color: rgba(16, 185, 129, 0.55);
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.9), 0 0 65px rgba(16, 185, 129, 0.4), 0 0 30px rgba(245, 158, 11, 0.25);
 }
 
 .opening-modal-backdrop.active .opening-modal-card {
   transform: scale(1) translateY(0);
 }
 
-/* Decorative Gold & Emerald Top Accent Line */
+/* Radiant Animated Top Accent Line */
 .opening-modal-card::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 5px;
-  background: linear-gradient(90deg, #f59e0b, #10b981, #f59e0b);
+  height: 6px;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  background: linear-gradient(90deg, #f59e0b, #10b981, #fcd34d, #10b981, #f59e0b);
+  background-size: 200% 100%;
+  animation: ribbonShimmer 4s linear infinite;
+}
+
+@keyframes ribbonShimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* ==========================================================================
+   CELEBRATION VECTORS SPREADING ON & AROUND THE MODAL
+   ========================================================================== */
+.modal-celebration-vector {
+  position: absolute;
+  pointer-events: none;
+  z-index: 10;
+  user-select: none;
+  filter: drop-shadow(0 2px 8px rgba(245, 158, 11, 0.5));
+}
+
+.v-top-left {
+  top: -22px;
+  left: -14px;
+  font-size: 2rem;
+  animation: floatCelebration1 3.2s ease-in-out infinite;
+}
+
+.v-top-right {
+  top: -20px;
+  right: 48px;
+  font-size: 2.1rem;
+  animation: floatCelebration2 2.8s ease-in-out infinite;
+}
+
+.v-mid-left {
+  top: 38%;
+  left: -24px;
+  font-size: 1.85rem;
+  animation: floatCelebration3 3.6s ease-in-out infinite;
+}
+
+.v-mid-right {
+  top: 42%;
+  right: -24px;
+  font-size: 1.9rem;
+  animation: floatCelebration1 3.4s ease-in-out infinite reverse;
+}
+
+.v-bottom-left {
+  bottom: -18px;
+  left: 18px;
+  font-size: 1.95rem;
+  animation: floatCelebration2 3.1s ease-in-out infinite;
+}
+
+.v-bottom-right {
+  bottom: -20px;
+  right: 22px;
+  font-size: 2.1rem;
+  animation: floatCelebration3 3.5s ease-in-out infinite;
+}
+
+@keyframes floatCelebration1 {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translateY(-12px) rotate(14deg) scale(1.18);
+  }
+}
+
+@keyframes floatCelebration2 {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translateY(-15px) rotate(-16deg) scale(1.22);
+  }
+}
+
+@keyframes floatCelebration3 {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translateY(-10px) rotate(10deg) scale(1.15);
+  }
+}
+
+/* Ornate Corner Flourish Vectors */
+.opening-corner-vector {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  pointer-events: none;
+  z-index: 4;
+  opacity: 0.85;
+}
+
+.opening-corner-vector.corner-tl {
+  top: 10px;
+  left: 10px;
+}
+
+.opening-corner-vector.corner-tr {
+  top: 10px;
+  right: 10px;
+}
+
+.opening-corner-vector.corner-bl {
+  bottom: 10px;
+  left: 10px;
+}
+
+.opening-corner-vector.corner-br {
+  bottom: 10px;
+  right: 10px;
+}
+
+/* Festive Garland Pennants Across Card Top */
+.opening-festive-garland {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.garland-pennant {
+  width: 14px;
+  height: 20px;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  opacity: 0.85;
+  animation: garlandSway 2.5s ease-in-out infinite;
+  transform-origin: top center;
+}
+
+.garland-pennant.p1 { background: #f59e0b; animation-delay: 0s; }
+.garland-pennant.p2 { background: #10b981; animation-delay: 0.3s; }
+.garland-pennant.p3 { background: #fcd34d; animation-delay: 0.6s; }
+.garland-pennant.p4 { background: #0e793c; animation-delay: 0.9s; }
+.garland-pennant.p5 { background: #f59e0b; animation-delay: 0.4s; }
+.garland-pennant.p6 { background: #34d399; animation-delay: 0.7s; }
+.garland-pennant.p7 { background: #d97706; animation-delay: 0.2s; }
+
+@keyframes garlandSway {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(12deg); }
 }
 
 .opening-modal-close {
@@ -4019,6 +4175,39 @@ button {
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
   padding: 0.85rem 1rem;
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.opening-detail-item.highlight-time {
+  border-color: rgba(245, 158, 11, 0.6);
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(16, 185, 129, 0.08) 100%);
+  box-shadow: 0 2px 10px rgba(245, 158, 11, 0.15);
+}
+
+[data-theme="dark"] .opening-detail-item.highlight-time {
+  border-color: rgba(251, 191, 36, 0.7);
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.16) 0%, rgba(16, 185, 129, 0.16) 100%);
+}
+
+.time-highlight {
+  color: #b45309 !important;
+  font-size: 0.96rem !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="dark"] .time-highlight {
+  color: #fcd34d !important;
+  text-shadow: 0 0 10px rgba(252, 211, 77, 0.4);
+}
+
+.detail-icon.time-icon {
+  background: rgba(245, 158, 11, 0.2);
+  color: #d97706;
+}
+
+[data-theme="dark"] .detail-icon.time-icon {
+  background: rgba(245, 158, 11, 0.3);
+  color: #fbbf24;
 }
 
 .opening-detail-item.full-width {
@@ -4079,48 +4268,126 @@ button {
   box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
 }
 
+.opening-phones-header {
+  font-family: var(--font-heading);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.opening-phones-header::before,
+.opening-phones-header::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-light);
+}
+
+/* 3 Phone Buttons Grid */
 .opening-phone-buttons {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.65rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
 }
 
 .opening-phone-buttons .btn {
   justify-content: center;
-  font-size: 0.88rem;
-  padding: 0.65rem 0.75rem;
+  font-size: 0.82rem;
+  padding: 0.6rem 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: var(--radius-md);
+}
+
+.phone-label-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  line-height: 1.15;
+}
+
+.phone-tag {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.phone-val {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* First Priority Phone Button Highlight */
+.opening-phone-buttons .phone-priority-primary {
+  border-color: rgba(16, 185, 129, 0.65);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(245, 158, 11, 0.12) 100%);
+  box-shadow: 0 2px 10px rgba(16, 185, 129, 0.2);
+}
+
+.opening-phone-buttons .phone-priority-primary .phone-tag {
+  color: #10b981;
+  font-weight: 800;
+}
+
+[data-theme="dark"] .opening-phone-buttons .phone-priority-primary {
+  border-color: rgba(16, 185, 129, 0.85);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.22) 0%, rgba(245, 158, 11, 0.2) 100%);
+  box-shadow: 0 0 14px rgba(16, 185, 129, 0.35);
+}
+
+[data-theme="dark"] .opening-phone-buttons .phone-priority-primary .phone-tag {
+  color: #34d399;
 }
 
 /* Celebrate Button */
 .celebrate-again-btn {
-  background: transparent;
-  border: none;
-  color: var(--accent-light);
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(16, 185, 129, 0.15) 100%);
+  border: 1.5px dashed rgba(245, 158, 11, 0.6);
+  color: var(--text-main);
   font-family: var(--font-heading);
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-size: 0.88rem;
+  font-weight: 700;
   cursor: pointer;
-  padding: 0.35rem 0.75rem;
-  border-radius: var(--radius-sm);
+  padding: 0.55rem 1.25rem;
+  border-radius: var(--radius-full);
   transition: all var(--transition-fast);
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  justify-content: center;
+  gap: 0.5rem;
+  position: relative;
+  z-index: 2;
 }
 
 .celebrate-again-btn:hover {
-  background: rgba(16, 185, 129, 0.12);
-  color: var(--primary);
-  transform: translateY(-1px);
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.25) 0%, rgba(16, 185, 129, 0.25) 100%);
+  border-color: #f59e0b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(245, 158, 11, 0.3);
 }
 
-[data-theme="dark"] .celebrate-again-btn:hover {
-  color: #34d399;
+.btn-sparkle {
+  font-size: 1rem;
+  animation: sparkleTwinkle 1.6s ease-in-out infinite alternate;
 }
 
-@media (max-width: 540px) {
+@media (max-width: 640px) {
   .opening-modal-card {
-    padding: 2.25rem 1.25rem 1.5rem;
+    padding: 2.5rem 1.25rem 1.5rem;
+    overflow: hidden; /* Avoid clipping out-of-screen on narrow devices */
   }
 
   .opening-details-grid {
@@ -4133,5 +4400,14 @@ button {
 
   .opening-phone-buttons {
     grid-template-columns: 1fr;
+  }
+
+  .opening-phone-buttons .btn {
+    padding: 0.65rem 1rem;
+  }
+
+  .modal-celebration-vector.v-mid-left,
+  .modal-celebration-vector.v-mid-right {
+    display: none; /* Keep cleaner margins on mobile */
   }
 }

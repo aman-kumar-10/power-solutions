@@ -995,19 +995,21 @@
   }
 
   // =========================================================================
-  // 17. NEW OFFICE GRAND OPENING MODAL & CELEBRATION VECTORS
+  // 17. NEW OFFICE GRAND OPENING MODAL & CELEBRATION VECTORS ENGINE
   // Active when visit time < September 14, 2026 11:00 PM IST
+  // Ceremony Timing: 4:00 PM (16:00:00) IST
   // =========================================================================
   function initGrandOpeningModal() {
     const modal = document.getElementById('opening-modal');
     const closeBtn = document.getElementById('opening-modal-close');
     const celebrateBtn = document.getElementById('celebrate-again-btn');
+    const canvas = document.getElementById('celebration-canvas');
     if (!modal) return;
 
     // Cutoff time: 14-09-2026 at 11:00 PM (23:00:00) IST
     const cutoffTime = new Date('2026-09-14T23:00:00+05:30').getTime();
-    // Welcome time: 14-09-2026 at 11:00 AM (11:00:00) IST
-    const eventStartTime = new Date('2026-09-14T11:00:00+05:30').getTime();
+    // Welcome time: 14-09-2026 at 4:00 PM (16:00:00) IST
+    const eventStartTime = new Date('2026-09-14T16:00:00+05:30').getTime();
 
     const now = new Date().getTime();
 
@@ -1034,7 +1036,7 @@
         if (minsEl) minsEl.textContent = String(mins).padStart(2, '0');
         if (secsEl) secsEl.textContent = String(secs).padStart(2, '0');
       } else {
-        // Happening today past 11 AM IST
+        // Happening today past 4:00 PM IST
         if (countdownContainer) {
           countdownContainer.innerHTML = '<div style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 800; color: #10b981; text-align: center; width: 100%;">🎉 GRAND OPENING IS LIVE TODAY! WELCOME TO ALL!</div>';
         }
@@ -1044,22 +1046,301 @@
     updateCountdown();
     const countdownTimer = setInterval(updateCountdown, 1000);
 
-    // Show on every visit with a brief delay for smooth appearance
+    // =========================================================================
+    // ADVANCED CANVAS CELEBRATION VECTORS ENGINE
+    // Spreads 3D tumbling ribbons, twinkling gold stars, sequins, and streamers
+    // =========================================================================
+    let ctx = canvas ? canvas.getContext('2d') : null;
+    let animId = null;
+    let ambientTimer = null;
+    let particles = [];
+    let width = 0;
+    let height = 0;
+
+    const colors = [
+      '#10B981', // Electric Emerald
+      '#024F16', // Forest Green
+      '#0E793C', // Brand Green
+      '#F59E0B', // Festive Gold
+      '#FCD34D', // Shimmer Amber
+      '#34D399', // Mint Sparkle
+      '#FFFFFF', // Specular White
+      '#FFE082', // Champagne Gold
+      '#D97706'  // Warm Bronze
+    ];
+
+    function resizeCanvas() {
+      if (!canvas) return;
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+
+    function drawStar(context, cx, cy, spikes, outerRadius, innerRadius) {
+      let rot = (Math.PI / 2) * 3;
+      let x = cx;
+      let y = cy;
+      const step = Math.PI / spikes;
+
+      context.beginPath();
+      context.moveTo(cx, cy - outerRadius);
+      for (let i = 0; i < spikes; i++) {
+        x = cx + Math.cos(rot) * outerRadius;
+        y = cy + Math.sin(rot) * outerRadius;
+        context.lineTo(x, y);
+        rot += step;
+
+        x = cx + Math.cos(rot) * innerRadius;
+        y = cy + Math.sin(rot) * innerRadius;
+        context.lineTo(x, y);
+        rot += step;
+      }
+      context.lineTo(cx, cy - outerRadius);
+      context.closePath();
+    }
+
+    function spawnCannonBurst(originX, originY, count, angleMin, angleMax, minSpeed, maxSpeed) {
+      for (let i = 0; i < count; i++) {
+        const angle = angleMin + Math.random() * (angleMax - angleMin);
+        const speed = minSpeed + Math.random() * (maxSpeed - minSpeed);
+        const typeRand = Math.random();
+
+        let type = 'ribbon';
+        if (typeRand < 0.28) type = 'star';
+        else if (typeRand < 0.50) type = 'diamond';
+        else if (typeRand < 0.72) type = 'circle';
+        else if (typeRand < 0.88) type = 'ribbon';
+        else type = 'streamer';
+
+        particles.push({
+          x: originX,
+          y: originY,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          sizeW: 8 + Math.random() * 12,
+          sizeH: 14 + Math.random() * 22,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360,
+          rotSpeed: (Math.random() - 0.5) * 18,
+          tilt: Math.random() * Math.PI,
+          tiltSpeed: 0.08 + Math.random() * 0.12,
+          drag: 0.982,
+          gravity: 0.32 + Math.random() * 0.16,
+          alpha: 1,
+          fadeSpeed: 0.0035 + Math.random() * 0.006,
+          type: type,
+          waveAngle: Math.random() * Math.PI * 2,
+          waveSpeed: 0.05 + Math.random() * 0.06
+        });
+      }
+    }
+
+    function spawnTopCascade(count) {
+      for (let i = 0; i < count; i++) {
+        const typeRand = Math.random();
+        particles.push({
+          x: Math.random() * width,
+          y: -20 - Math.random() * 80,
+          vx: (Math.random() - 0.5) * 3,
+          vy: 2 + Math.random() * 4,
+          sizeW: 7 + Math.random() * 10,
+          sizeH: 12 + Math.random() * 18,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360,
+          rotSpeed: (Math.random() - 0.5) * 12,
+          tilt: Math.random() * Math.PI,
+          tiltSpeed: 0.06 + Math.random() * 0.1,
+          drag: 0.99,
+          gravity: 0.18 + Math.random() * 0.15,
+          alpha: 1,
+          fadeSpeed: 0.0025 + Math.random() * 0.005,
+          type: typeRand > 0.4 ? 'star' : (typeRand > 0.2 ? 'diamond' : 'circle'),
+          waveAngle: Math.random() * Math.PI * 2,
+          waveSpeed: 0.04 + Math.random() * 0.05
+        });
+      }
+    }
+
+    function spawnClickBurst(x, y, count) {
+      for (let i = 0; i < count; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = 4 + Math.random() * 14;
+        const typeRand = Math.random();
+
+        particles.push({
+          x: x,
+          y: y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          sizeW: 6 + Math.random() * 10,
+          sizeH: 10 + Math.random() * 16,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360,
+          rotSpeed: (Math.random() - 0.5) * 20,
+          tilt: Math.random() * Math.PI,
+          tiltSpeed: 0.1 + Math.random() * 0.14,
+          drag: 0.965,
+          gravity: 0.28,
+          alpha: 1,
+          fadeSpeed: 0.008 + Math.random() * 0.012,
+          type: typeRand > 0.5 ? 'star' : 'diamond',
+          waveAngle: 0,
+          waveSpeed: 0
+        });
+      }
+    }
+
+    function launchGrandCelebration() {
+      if (!canvas || !ctx) return;
+      resizeCanvas();
+
+      // Dual Bottom Cannons (Bottom-Left & Bottom-Right)
+      spawnCannonBurst(width * 0.08, height * 0.88, 140, -Math.PI * 0.45, -Math.PI * 0.15, 16, 32);
+      spawnCannonBurst(width * 0.92, height * 0.88, 140, -Math.PI * 0.85, -Math.PI * 0.55, 16, 32);
+
+      // Top Center Radiant Cascade
+      spawnTopCascade(80);
+
+      // Center Burst directly around the modal
+      spawnClickBurst(width * 0.5, height * 0.4, 50);
+    }
+
+    function renderLoop() {
+      if (!ctx) return;
+      ctx.clearRect(0, 0, width, height);
+
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+
+        p.vx *= p.drag;
+        p.vy = p.vy * p.drag + p.gravity;
+        p.x += p.vx;
+        p.y += p.vy;
+
+        p.rotation += p.rotSpeed;
+        p.tilt += p.tiltSpeed;
+        p.alpha -= p.fadeSpeed;
+
+        if (p.type === 'streamer') {
+          p.waveAngle += p.waveSpeed;
+          p.x += Math.sin(p.waveAngle) * 1.6;
+        }
+
+        if (p.alpha <= 0 || p.y > height + 50) {
+          particles.splice(i, 1);
+          continue;
+        }
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate((p.rotation * Math.PI) / 180);
+        ctx.globalAlpha = Math.max(0, p.alpha);
+        ctx.fillStyle = p.color;
+
+        const tiltScale = Math.abs(Math.cos(p.tilt));
+
+        if (p.type === 'star') {
+          // Shimmering Golden Star Vector
+          drawStar(ctx, 0, 0, 5, p.sizeW, p.sizeW * 0.45);
+          ctx.fill();
+          ctx.strokeStyle = '#FFFFFF';
+          ctx.lineWidth = 0.6;
+          ctx.stroke();
+        } else if (p.type === 'diamond') {
+          // 4-Point Diamond Sparkle
+          ctx.beginPath();
+          ctx.moveTo(0, -p.sizeH * 0.6);
+          ctx.lineTo(p.sizeW * 0.5, 0);
+          ctx.lineTo(0, p.sizeH * 0.6);
+          ctx.lineTo(-p.sizeW * 0.5, 0);
+          ctx.closePath();
+          ctx.fill();
+        } else if (p.type === 'circle') {
+          // Metallic Festive Sequin
+          ctx.beginPath();
+          ctx.arc(0, 0, p.sizeW * 0.5, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        } else if (p.type === 'streamer') {
+          // Sinusoidal Celebration Ribbon
+          ctx.beginPath();
+          ctx.rect(-p.sizeW * 0.35, -p.sizeH * 0.5, p.sizeW * 0.7, p.sizeH);
+          ctx.fill();
+        } else {
+          // 3D Tumbling Confetti Ribbon
+          const currentW = Math.max(1.5, p.sizeW * tiltScale);
+          ctx.fillRect(-currentW / 2, -p.sizeH / 2, currentW, p.sizeH);
+          ctx.strokeStyle = '#FFFFFF';
+          ctx.lineWidth = 0.5;
+          ctx.strokeRect(-currentW / 2, -p.sizeH / 2, currentW, p.sizeH);
+        }
+
+        ctx.restore();
+      }
+
+      animId = requestAnimationFrame(renderLoop);
+    }
+
+    function startCelebrationEngine() {
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+
+      if (!animId) {
+        animId = requestAnimationFrame(renderLoop);
+      }
+
+      // Initial Grand Celebration Blast
+      launchGrandCelebration();
+
+      // Continuous Ambient Celebration Floaters: Keeps celebration active around modal
+      if (ambientTimer) clearInterval(ambientTimer);
+      ambientTimer = setInterval(() => {
+        if (!modal.classList.contains('active')) return;
+        if (particles.length < 180) {
+          spawnTopCascade(3);
+        }
+      }, 160);
+    }
+
+    function stopCelebrationEngine() {
+      if (ambientTimer) {
+        clearInterval(ambientTimer);
+        ambientTimer = null;
+      }
+      if (animId) {
+        cancelAnimationFrame(animId);
+        animId = null;
+      }
+      if (ctx && canvas) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+      particles = [];
+      window.removeEventListener('resize', resizeCanvas);
+    }
+
+    // Show on visit with smooth timing
     setTimeout(() => {
       modal.classList.add('active');
-      launchCelebrationVectors();
+      startCelebrationEngine();
       refreshLucideIcons();
     }, 650);
 
     function closeModal() {
       modal.classList.remove('active');
       clearInterval(countdownTimer);
+      stopCelebrationEngine();
     }
 
     if (closeBtn) closeBtn.addEventListener('click', closeModal);
 
     modal.addEventListener('click', (e) => {
-      if (e.target === modal) closeModal();
+      if (e.target === modal) {
+        closeModal();
+      } else if (e.target === canvas) {
+        // Interactive firework burst on canvas click
+        spawnClickBurst(e.clientX, e.clientY, 35);
+      }
     });
 
     document.addEventListener('keydown', (e) => {
@@ -1071,122 +1352,9 @@
     if (celebrateBtn) {
       celebrateBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        launchCelebrationVectors();
+        launchGrandCelebration();
       });
     }
-  }
-
-  // High-performance canvas celebration vectors & confetti streamer cannon
-  function launchCelebrationVectors() {
-    const canvas = document.getElementById('celebration-canvas');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let width = (canvas.width = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
-
-    const onResize = () => {
-      if (!canvas) return;
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    };
-    window.addEventListener('resize', onResize);
-
-    const colors = [
-      '#10B981', // Electric Emerald
-      '#024F16', // Forest Green
-      '#0E793C', // Brand Green
-      '#F59E0B', // Festive Gold
-      '#FCD34D', // Amber Highlight
-      '#34D399', // Mint
-      '#FFFFFF'  // Specular White
-    ];
-
-    const particles = [];
-    const particleCount = 120;
-
-    // Throw celebratory vectors from bottom-left and bottom-right bursting upwards
-    for (let i = 0; i < particleCount; i++) {
-      const fromLeft = i % 2 === 0;
-      const originX = fromLeft ? width * 0.12 : width * 0.88;
-      const originY = height * 0.84;
-      const angle = fromLeft
-        ? -Math.PI * 0.35 + (Math.random() - 0.5) * 0.65
-        : -Math.PI * 0.65 + (Math.random() - 0.5) * 0.65;
-      const speed = 15 + Math.random() * 20;
-
-      particles.push({
-        x: originX,
-        y: originY,
-        vx: Math.cos(angle) * speed,
-        vy: Math.sin(angle) * speed,
-        sizeW: 8 + Math.random() * 10,
-        sizeH: 14 + Math.random() * 20,
-        color: colors[Math.floor(Math.random() * colors.length)],
-        rotation: Math.random() * 360,
-        rotSpeed: (Math.random() - 0.5) * 16,
-        drag: 0.985,
-        gravity: 0.38,
-        alpha: 1,
-        fadeSpeed: 0.005 + Math.random() * 0.007,
-        isBar: Math.random() > 0.35
-      });
-    }
-
-    let animId;
-    function render() {
-      ctx.clearRect(0, 0, width, height);
-
-      let activeCount = 0;
-      for (let i = 0; i < particles.length; i++) {
-        const p = particles[i];
-        if (p.alpha <= 0) continue;
-        activeCount++;
-
-        p.vx *= p.drag;
-        p.vy = p.vy * p.drag + p.gravity;
-        p.x += p.vx;
-        p.y += p.vy;
-        p.rotation += p.rotSpeed;
-        p.alpha -= p.fadeSpeed;
-
-        ctx.save();
-        ctx.translate(p.x, p.y);
-        ctx.rotate((p.rotation * Math.PI) / 180);
-        ctx.globalAlpha = Math.max(0, p.alpha);
-        ctx.fillStyle = p.color;
-
-        if (p.isBar) {
-          // Celebration bar / ribbon vector
-          ctx.fillRect(-p.sizeW / 2, -p.sizeH / 2, p.sizeW, p.sizeH);
-          ctx.strokeStyle = '#FFFFFF';
-          ctx.lineWidth = 0.5;
-          ctx.strokeRect(-p.sizeW / 2, -p.sizeH / 2, p.sizeW, p.sizeH);
-        } else {
-          // Celebration diamond sparkler
-          ctx.beginPath();
-          ctx.moveTo(0, -p.sizeH / 2);
-          ctx.lineTo(p.sizeW / 2, 0);
-          ctx.lineTo(0, p.sizeH / 2);
-          ctx.lineTo(-p.sizeW / 2, 0);
-          ctx.closePath();
-          ctx.fill();
-        }
-
-        ctx.restore();
-      }
-
-      if (activeCount > 0) {
-        animId = requestAnimationFrame(render);
-      } else {
-        ctx.clearRect(0, 0, width, height);
-        window.removeEventListener('resize', onResize);
-        cancelAnimationFrame(animId);
-      }
-    }
-
-    render();
   }
 
 })();
