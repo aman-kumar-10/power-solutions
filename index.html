@@ -4,9 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
+  <!-- Inline Anti-FOUC Theme Initializer: Defaults to Light (White + Green) -->
+  <script>
+    (function () {
+      try {
+        const savedTheme = localStorage.getItem('ps_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  
   <!-- Primary SEO Meta Tags -->
   <title>Power Solutions — Class "A" Licensed Electrical Contractor | Punjab Certified</title>
-  <meta name="description" content="Class 'A' Licensed Electrical Contractor in Punjab (Govt. Certified). Expert LT & HT works (up to 33kV), custom panel manufacturing (PCC/MCC), industrial automation & authorized supply for ABB, Schneider, Havells, L&T, Siemens. Call +91 6283027340.">
+  <meta name="description" content="Class 'A' Licensed Electrical Contractor in Punjab (Govt. Certified). Expert LT & HT works (up to 33kV), custom panel manufacturing (PCC/MCC), industrial automation & authorized supply for ABB, Schneider, Havells, L&T, Siemens. Call +91 6283027340, +91 8968972704.">
   <meta name="keywords" content="Class A electrical contractor Punjab, licensed electrical contractor Mohali, electrical contractor Kharar, LT HT electrical works, panel manufacturing Punjab, industrial automation, ABB dealer Punjab, Schneider dealer, Havells distributor, UDYAM-PB-20-0103957, GSTIN 03BFVPT8691B1ZB, chemical earthing Kharar, street lighting contractor">
   <meta name="author" content="Power Solutions">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
@@ -39,7 +51,7 @@
   <!-- Performance & Resource Hints -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://unpkg.com">
   
   <!-- Preload Critical LCP Hero Image -->
   <link rel="preload" as="image" href="assets/images/banner1.webp" type="image/webp" fetchpriority="high">
@@ -50,11 +62,11 @@
   <link rel="shortcut icon" href="favicon.ico?v=2">
   <link rel="apple-touch-icon" href="assets/images/favicon.svg?v=2">
 
-  <!-- Google Fonts: Sora (Headings) & Inter (Body Copy) -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <!-- Google Fonts: Space Grotesk (Engineering Precision), Inter (Body) & JetBrains Mono (Specs) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Font Awesome 6.5.1 CDN -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Lucide Icons CDN (Ultra-clean, modern engineering iconography) -->
+  <script src="https://unpkg.com/lucide@latest"></script>
 
   <!-- Core Custom Stylesheet -->
   <link rel="stylesheet" href="assets/css/style.css">
@@ -73,7 +85,7 @@
         "logo": "https://powersolutionsservices.in/assets/images/logo.svg",
         "image": "https://powersolutionsservices.in/assets/images/banner1.webp",
         "description": "Class 'A' Licensed Electrical Contractor certified by the Government of Punjab. Specializing in LT & HT Works up to 33kV, custom electrical control panel manufacturing (PCC/MCC), industrial automation & SCADA, chemical earthing, and authorized electrical distribution for ABB, Schneider, Havells, L&T, and Siemens.",
-        "telephone": "+916283027340",
+        "telephone": "+916283027340, +91 8968972704",
         "email": "powersolutions@zohomail.in",
         "taxID": "UDYAM-PB-20-0103957",
         "vatID": "03BFVPT8691B1ZB",
@@ -206,7 +218,7 @@
             "name": "Where is Power Solutions located and what regions are served?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Our registered office is located at 16, Sawraj Enclave, Near Shivalik City, Kharar – 140301, Punjab. We serve industrial, commercial, and government projects throughout Mohali, Kharar, Chandigarh, Panchkula, Zirakpur, and the wider Punjab and North India region."
+              "text": "Our registered office is located at Office no 12A plot no E 45 phase 8 industrial area Mohali, Punjab. We serve industrial, commercial, and government projects throughout Mohali, Kharar, Chandigarh, Panchkula, Zirakpur, and the wider Punjab and North India region."
             }
           },
           {
@@ -261,13 +273,16 @@
 </head>
 <body>
 
+  <!-- Top Scroll Progress Bar -->
+  <div class="scroll-progress-bar" id="scroll-progress"></div>
+
   <!-- =========================================================================
-       SECTION 1: TOP UTILITY BAR (License Badge + Direct Contacts)
+       SECTION 1: TOP UTILITY BAR (Official Credentials & Direct Contacts)
        ========================================================================= -->
   <aside class="topbar" id="topbar" aria-label="Official Credentials & Quick Contacts">
     <div class="container topbar-content">
       <div class="topbar-badge">
-        <i class="fas fa-certificate" aria-hidden="true"></i>
+        <i data-lucide="award"></i>
         <span>
           <strong>Class "A" Licensed Electrical Contractor</strong>
           <span class="topbar-divider">•</span>
@@ -275,12 +290,13 @@
         </span>
       </div>
       <div class="topbar-contact">
-        <a href="tel:+916283027340" aria-label="Call Power Solutions at +91 6283027340">
-          <i class="fas fa-phone-alt" aria-hidden="true"></i>
-          <span>+91 6283027340</span>
-        </a>
+        <div class="topbar-phone-wrapper">
+          <i data-lucide="phone"></i>
+          <a href="tel:+916283027340" aria-label="Call Power Solutions at +91 6283027340">+91 6283027340</a><span class="phone-sep">,</span>
+          <a href="tel:+918968972704" aria-label="Call Power Solutions at +91 8968972704">+91 8968972704</a>
+        </div>
         <a href="mailto:powersolutions@zohomail.in" aria-label="Email Power Solutions">
-          <i class="fas fa-envelope" aria-hidden="true"></i>
+          <i data-lucide="mail"></i>
           <span>powersolutions@zohomail.in</span>
         </a>
       </div>
@@ -288,19 +304,20 @@
   </aside>
 
   <!-- =========================================================================
-       SECTION 2: STICKY HEADER & NAVIGATION
+       SECTION 2: STICKY HEADER & DYNAMIC NAVIGATION WITH SLIDING UNDERLINE
        ========================================================================= -->
   <header class="header" id="header" role="banner">
     <div class="container">
       <div class="header-content">
         <!-- Logo -->
         <a href="#home" class="logo" aria-label="Power Solutions Home">
-          <img src="assets/images/logo.svg" alt="Power Solutions Logo" width="230" height="48">
+          <img id="site-logo" src="assets/images/logo.svg" alt="Power Solutions Logo" width="230" height="48">
         </a>
 
-        <!-- Desktop Navigation Links -->
+        <!-- Desktop Navigation with Dynamic Sliding Indicator -->
         <nav class="desktop-nav" aria-label="Main Navigation">
           <ul class="desktop-nav-menu" role="menubar">
+            <span class="nav-indicator" id="nav-indicator"></span>
             <li role="none"><a href="#home" class="nav-link active" role="menuitem">Home</a></li>
             <li role="none"><a href="#services" class="nav-link" role="menuitem">Services</a></li>
             <li role="none"><a href="#projects" class="nav-link" role="menuitem">Projects</a></li>
@@ -312,9 +329,15 @@
 
         <!-- Header Actions & CTA -->
         <div class="header-actions">
+          <!-- Theme Mode Switcher (White+Green Light <-> Pine/Obsidian Dark) -->
+          <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle Light/Dark Theme" title="Toggle Light/Dark Theme">
+            <i data-lucide="moon" class="theme-icon-moon"></i>
+            <i data-lucide="sun" class="theme-icon-sun"></i>
+          </button>
+
           <a href="#contact" class="btn btn-primary btn-sm header-cta-desktop">
             <span>Get Quote</span>
-            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+            <i data-lucide="arrow-right"></i>
           </a>
 
           <!-- Mobile Hamburger Toggle -->
@@ -330,17 +353,16 @@
 
   <!-- =========================================================================
        MOBILE NAVIGATION DRAWER & BACKDROP OVERLAY
-       Placed outside <header> to eliminate stacking context isolation & blur bugs
        ========================================================================= -->
   <div class="mobile-menu-overlay" id="mobile-overlay" aria-hidden="true"></div>
 
   <aside class="mobile-drawer" id="mobile-drawer" aria-label="Mobile Navigation" role="dialog" aria-modal="true">
     <div class="mobile-drawer-header">
       <a href="#home" class="mobile-drawer-brand" aria-label="Power Solutions Home">
-        <img src="assets/images/logo.svg" alt="Power Solutions Logo" width="160" height="34">
+        <img id="mobile-site-logo" src="assets/images/logo.svg" alt="Power Solutions Logo" width="160" height="34">
       </a>
       <button class="mobile-drawer-close" id="mobile-drawer-close" aria-label="Close navigation menu">
-        <i class="fas fa-times" aria-hidden="true"></i>
+        <i data-lucide="x"></i>
       </button>
     </div>
 
@@ -348,51 +370,51 @@
       <ul class="mobile-nav-list" role="menu">
         <li role="none">
           <a href="#home" class="mobile-nav-link active" role="menuitem">
-            <span class="mobile-nav-icon"><i class="fas fa-house" aria-hidden="true"></i></span>
+            <span class="mobile-nav-icon"><i data-lucide="home"></i></span>
             <span class="mobile-nav-text">Home</span>
-            <i class="fas fa-chevron-right mobile-nav-arrow" aria-hidden="true"></i>
+            <i data-lucide="chevron-right"></i>
           </a>
         </li>
         <li role="none">
           <a href="#services" class="mobile-nav-link" role="menuitem">
-            <span class="mobile-nav-icon"><i class="fas fa-bolt" aria-hidden="true"></i></span>
+            <span class="mobile-nav-icon"><i data-lucide="zap"></i></span>
             <span class="mobile-nav-text">Services</span>
-            <i class="fas fa-chevron-right mobile-nav-arrow" aria-hidden="true"></i>
+            <i data-lucide="chevron-right"></i>
           </a>
         </li>
         <li role="none">
           <a href="#projects" class="mobile-nav-link" role="menuitem">
-            <span class="mobile-nav-icon"><i class="fas fa-folder-open" aria-hidden="true"></i></span>
+            <span class="mobile-nav-icon"><i data-lucide="folder-kanban"></i></span>
             <span class="mobile-nav-text">Projects</span>
-            <i class="fas fa-chevron-right mobile-nav-arrow" aria-hidden="true"></i>
+            <i data-lucide="chevron-right"></i>
           </a>
         </li>
         <li role="none">
           <a href="#brands" class="mobile-nav-link" role="menuitem">
-            <span class="mobile-nav-icon"><i class="fas fa-handshake" aria-hidden="true"></i></span>
+            <span class="mobile-nav-icon"><i data-lucide="handshake"></i></span>
             <span class="mobile-nav-text">Partners</span>
-            <i class="fas fa-chevron-right mobile-nav-arrow" aria-hidden="true"></i>
+            <i data-lucide="chevron-right"></i>
           </a>
         </li>
         <li role="none">
           <a href="#about" class="mobile-nav-link" role="menuitem">
-            <span class="mobile-nav-icon"><i class="fas fa-shield-halved" aria-hidden="true"></i></span>
+            <span class="mobile-nav-icon"><i data-lucide="shield-check"></i></span>
             <span class="mobile-nav-text">About Us</span>
-            <i class="fas fa-chevron-right mobile-nav-arrow" aria-hidden="true"></i>
+            <i data-lucide="chevron-right"></i>
           </a>
         </li>
         <li role="none">
           <a href="#contact" class="mobile-nav-link" role="menuitem">
-            <span class="mobile-nav-icon"><i class="fas fa-envelope" aria-hidden="true"></i></span>
+            <span class="mobile-nav-icon"><i data-lucide="mail"></i></span>
             <span class="mobile-nav-text">Contact Us</span>
-            <i class="fas fa-chevron-right mobile-nav-arrow" aria-hidden="true"></i>
+            <i data-lucide="chevron-right"></i>
           </a>
         </li>
       </ul>
 
       <!-- Quick Trust Credentials in Drawer -->
       <div class="mobile-drawer-badge">
-        <i class="fas fa-certificate" aria-hidden="true"></i>
+        <i data-lucide="award"></i>
         <div>
           <strong>Class "A" Electrical Contractor</strong>
           <span>Govt. of Punjab Certified • UDYAM-PB-20-0103957</span>
@@ -403,20 +425,44 @@
     <div class="mobile-drawer-footer">
       <a href="#contact" class="btn btn-primary btn-block mobile-drawer-cta">
         <span>Get Instant Quote</span>
-        <i class="fas fa-arrow-right" aria-hidden="true"></i>
+        <i data-lucide="arrow-right"></i>
       </a>
-      <a href="tel:+916283027340" class="btn btn-outline btn-block mobile-drawer-phone">
-        <i class="fas fa-phone-alt" aria-hidden="true"></i>
-        <span>Call: +91 6283027340</span>
-      </a>
+      <div class="mobile-drawer-phones">
+        <a href="tel:+916283027340" class="btn btn-secondary mobile-drawer-phone">
+          <i data-lucide="phone"></i>
+          <span>Call: +91 6283027340</span>
+        </a>
+        <a href="tel:+918968972704" class="btn btn-secondary mobile-drawer-phone">
+          <i data-lucide="phone"></i>
+          <span>Call: +91 8968972704</span>
+        </a>
+      </div>
     </div>
   </aside>
 
   <main id="main-content">
     <!-- =========================================================================
-         SECTION 3: AUTO-SLIDING HERO SECTION (3 Slides + Crossfade + Parallax)
+         SECTION 3: HERO SHOWCASE (Dark Mesh + Circuit Lines + Parallax Chips)
          ========================================================================= -->
     <section class="hero" id="home" aria-label="Hero Showcase">
+      <!-- Gradient Mesh & Glow Energy Blob -->
+      <div class="hero-mesh"></div>
+      <div class="hero-glow-blob"></div>
+
+      <!-- Animated Circuit-Line SVG Overlay -->
+      <div class="circuit-overlay" aria-hidden="true">
+        <svg class="circuit-svg" viewBox="0 0 1440 900" preserveAspectRatio="none">
+          <path class="circuit-path-flow" d="M0,200 L380,200 L460,280 L880,280 L960,200 L1440,200" />
+          <path class="circuit-path-flow" d="M0,680 L280,680 L360,600 L1100,600 L1180,680 L1440,680" opacity="0.6" />
+          <path class="circuit-path-flow" d="M920,0 L920,240 L1020,340 L1020,900" opacity="0.4" />
+          <!-- Pulsing Circuit Nodes -->
+          <circle class="circuit-node" cx="460" cy="280" r="4.5" />
+          <circle class="circuit-node" cx="880" cy="280" r="4.5" />
+          <circle class="circuit-node" cx="360" cy="600" r="4.5" />
+          <circle class="circuit-node" cx="1100" cy="600" r="4.5" />
+        </svg>
+      </div>
+
       <div class="hero-slider">
         <!-- Slide 1: Core Electrical Solutions -->
         <article class="hero-slide active" aria-label="Slide 1 of 3">
@@ -425,7 +471,7 @@
           <div class="container">
             <div class="hero-content">
               <div class="hero-badge">
-                <i class="fas fa-shield-halved" aria-hidden="true"></i>
+                <i data-lucide="shield-check"></i>
                 <span>Government of Punjab Certified Contractor</span>
               </div>
               <h1 class="hero-title">Professional <span>Electrical Solutions</span></h1>
@@ -436,11 +482,11 @@
               <div class="hero-buttons">
                 <a href="#services" class="btn btn-primary">
                   <span>Our Services</span>
-                  <i class="fas fa-bolt" aria-hidden="true"></i>
+                  <i data-lucide="zap"></i>
                 </a>
                 <a href="#contact" class="btn btn-secondary">
                   <span>Contact Us</span>
-                  <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                  <i data-lucide="arrow-right"></i>
                 </a>
               </div>
             </div>
@@ -454,7 +500,7 @@
           <div class="container">
             <div class="hero-content">
               <div class="hero-badge">
-                <i class="fas fa-certificate" aria-hidden="true"></i>
+                <i data-lucide="award"></i>
                 <span>Authorized Dealer Network</span>
               </div>
               <h2 class="hero-title">Authorized Dealer of <span>Premium Brands</span></h2>
@@ -465,11 +511,11 @@
               <div class="hero-buttons">
                 <a href="#brands" class="btn btn-accent">
                   <span>Explore Partners</span>
-                  <i class="fas fa-handshake" aria-hidden="true"></i>
+                  <i data-lucide="handshake"></i>
                 </a>
                 <a href="#contact" class="btn btn-secondary">
                   <span>Request Product Quote</span>
-                  <i class="fas fa-file-invoice" aria-hidden="true"></i>
+                  <i data-lucide="file-text"></i>
                 </a>
               </div>
             </div>
@@ -483,7 +529,7 @@
           <div class="container">
             <div class="hero-content">
               <div class="hero-badge">
-                <i class="fas fa-award" aria-hidden="true"></i>
+                <i data-lucide="check-circle-2"></i>
                 <span>MSME Registered Enterprise</span>
               </div>
               <h2 class="hero-title">Government Approved <span>Contractor</span></h2>
@@ -494,25 +540,56 @@
               <div class="hero-buttons">
                 <a href="#about" class="btn btn-primary">
                   <span>About Our Company</span>
-                  <i class="fas fa-building" aria-hidden="true"></i>
+                  <i data-lucide="building-2"></i>
                 </a>
-                <a href="tel:+916283027340" class="btn btn-secondary">
-                  <span>Call Us Direct</span>
-                  <i class="fas fa-phone-alt" aria-hidden="true"></i>
-                </a>
+                <div class="hero-phone-group">
+                  <a href="tel:+916283027340" class="btn btn-secondary">
+                    <i data-lucide="phone"></i>
+                    <span>+91 6283027340</span>
+                  </a>
+                  <a href="tel:+918968972704" class="btn btn-secondary">
+                    <i data-lucide="phone"></i>
+                    <span>+91 8968972704</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </article>
       </div>
 
-      <!-- Hero Prev/Next Arrows -->
+      <!-- Floating Parallax Trust Chips (Desktop Only) -->
+      <div class="hero-floating-chips" aria-hidden="true">
+        <div class="hero-chip">
+          <div class="chip-icon"><i data-lucide="shield-check"></i></div>
+          <div>
+            <strong>Class "A" CEIG</strong>
+            <span>Govt. Certified Up to 33kV</span>
+          </div>
+        </div>
+        <div class="hero-chip">
+          <div class="chip-icon"><i data-lucide="cpu"></i></div>
+          <div>
+            <strong>Custom Panels</strong>
+            <span>PCC / MCC / APFC Enclosures</span>
+          </div>
+        </div>
+        <div class="hero-chip">
+          <div class="chip-icon"><i data-lucide="award"></i></div>
+          <div>
+            <strong>100% Genuine OEM</strong>
+            <span>ABB • Schneider • Siemens</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Prev/Next Controls -->
       <div class="hero-controls" aria-label="Slide Controls">
         <button class="hero-nav-btn" id="hero-prev" aria-label="Previous Slide">
-          <i class="fas fa-chevron-left" aria-hidden="true"></i>
+          <i data-lucide="chevron-left"></i>
         </button>
         <button class="hero-nav-btn" id="hero-next" aria-label="Next Slide">
-          <i class="fas fa-chevron-right" aria-hidden="true"></i>
+          <i data-lucide="chevron-right"></i>
         </button>
       </div>
 
@@ -533,48 +610,51 @@
     </section>
 
     <!-- =========================================================================
-         SECTION 4: ANIMATED STATS COUNTERS
+         SECTION 4: ANIMATED STATS COUNTERS (Angled Dark Strip with Circuit Track)
          ========================================================================= -->
-    <div class="container">
-      <section class="stats-strip reveal" id="stats" aria-label="Company Statistics">
-        <div class="stats-grid">
-          <!-- Stat 1: Experience -->
-          <div class="stat-card">
-            <div class="stat-number-wrapper">
-              <span class="stat-count" data-target="15">0</span>
-              <span class="stat-suffix">+</span>
+    <div class="stats-band-wrapper">
+      <div class="container">
+        <section class="stats-strip reveal" id="stats" aria-label="Company Statistics">
+          <div class="stats-circuit-line"></div>
+          <div class="stats-grid">
+            <!-- Stat 1: Experience -->
+            <div class="stat-card">
+              <div class="stat-number-wrapper">
+                <span class="stat-count" data-target="15">0</span>
+                <span class="stat-suffix">+</span>
+              </div>
+              <div class="stat-label">Years of Industry Experience</div>
             </div>
-            <div class="stat-label">Years of Industry Experience</div>
-          </div>
 
-          <!-- Stat 2: Projects Delivered -->
-          <div class="stat-card">
-            <div class="stat-number-wrapper">
-              <span class="stat-count" data-target="500">0</span>
-              <span class="stat-suffix">+</span>
+            <!-- Stat 2: Projects Delivered -->
+            <div class="stat-card">
+              <div class="stat-number-wrapper">
+                <span class="stat-count" data-target="500">0</span>
+                <span class="stat-suffix">+</span>
+              </div>
+              <div class="stat-label">Industrial & Commercial Projects</div>
             </div>
-            <div class="stat-label">Industrial & Commercial Projects</div>
-          </div>
 
-          <!-- Stat 3: Authorized Brands -->
-          <div class="stat-card">
-            <div class="stat-number-wrapper">
-              <span class="stat-count" data-target="15">0</span>
-              <span class="stat-suffix">+</span>
+            <!-- Stat 3: Authorized Brands -->
+            <div class="stat-card">
+              <div class="stat-number-wrapper">
+                <span class="stat-count" data-target="15">0</span>
+                <span class="stat-suffix">+</span>
+              </div>
+              <div class="stat-label">Authorized Brand Partners</div>
             </div>
-            <div class="stat-label">Authorized Brand Partners</div>
-          </div>
 
-          <!-- Stat 4: Client Satisfaction -->
-          <div class="stat-card">
-            <div class="stat-number-wrapper">
-              <span class="stat-count" data-target="100">0</span>
-              <span class="stat-suffix">%</span>
+            <!-- Stat 4: Client Satisfaction -->
+            <div class="stat-card">
+              <div class="stat-number-wrapper">
+                <span class="stat-count" data-target="100">0</span>
+                <span class="stat-suffix">%</span>
+              </div>
+              <div class="stat-label">Client Satisfaction & Safety</div>
             </div>
-            <div class="stat-label">Client Satisfaction & Safety</div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
 
     <!-- =========================================================================
@@ -582,10 +662,8 @@
          ========================================================================= -->
     <section class="services-section section-spacing" id="services" aria-labelledby="services-heading">
       <div class="container">
-        <div class="section-header reveal">
-          <span class="section-eyebrow">
-            <i class="fas fa-bolt" aria-hidden="true"></i> Core Capabilities
-          </span>
+        <div class="section-header reveal-heading">
+          <span class="section-eyebrow">Core Capabilities</span>
           <h2 class="section-title" id="services-heading">Comprehensive <span>Electrical Services</span></h2>
           <p class="section-subtitle">
             Engineered precision, certified government contractor standards, and premier execution across industrial, commercial, and municipal infrastructures.
@@ -597,14 +675,14 @@
       </div>
     </section>
 
-    <!-- Interactive Service Detail Modal -->
+    <!-- Interactive Technical Service Detail Modal -->
     <div class="modal-backdrop" id="service-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
       <div class="modal-dialog">
         <button class="modal-close-btn" id="modal-close" aria-label="Close Service Details">
-          <i class="fas fa-times" aria-hidden="true"></i>
+          <i data-lucide="x"></i>
         </button>
         <div class="modal-header-icon">
-          <i class="fas fa-bolt" id="modal-icon" aria-hidden="true"></i>
+          <i data-lucide="zap" id="modal-icon"></i>
         </div>
         <h3 class="modal-title" id="modal-title">Service Details</h3>
         <div class="modal-body">
@@ -615,21 +693,19 @@
           </div>
           <a href="#contact" class="btn btn-primary btn-block" id="modal-cta">
             <span>Request Quotation for This Service</span>
-            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+            <i data-lucide="arrow-right"></i>
           </a>
         </div>
       </div>
     </div>
 
     <!-- =========================================================================
-         SECTION 6: FILTERABLE PROJECTS GALLERY
+         SECTION 6: FILTERABLE PROJECTS GALLERY (Sliding Tab Underline)
          ========================================================================= -->
     <section class="projects-section section-spacing" id="projects" aria-labelledby="projects-heading">
       <div class="container">
-        <div class="section-header reveal">
-          <span class="section-eyebrow">
-            <i class="fas fa-diagram-project" aria-hidden="true"></i> Proven Track Record
-          </span>
+        <div class="section-header reveal-heading">
+          <span class="section-eyebrow">Proven Track Record</span>
           <h2 class="section-title" id="projects-heading">Featured <span>Engineering Projects</span></h2>
           <p class="section-subtitle">
             Demonstrated mastery in high-voltage industrial installations, multi-story commercial distributions, and municipality infrastructure.
@@ -686,14 +762,12 @@
     </section>
 
     <!-- =========================================================================
-         SECTION 7: BRAND-PARTNER MARQUEE & CATEGORY CARDS
+         SECTION 7: BRAND-PARTNER MARQUEE & CATEGORY CARDS (Dual Opposite Marquee)
          ========================================================================= -->
-    <section class="brands-section section-spacing" id="brands" aria-labelledby="brands-heading">
+    <section class="brands-section section-spacing dark-section" id="brands" aria-labelledby="brands-heading">
       <div class="container">
-        <div class="section-header reveal">
-          <span class="section-eyebrow">
-            <i class="fas fa-handshake" aria-hidden="true"></i> Genuine Supply Network
-          </span>
+        <div class="section-header reveal-heading">
+          <span class="section-eyebrow">Genuine Supply Network</span>
           <h2 class="section-title" id="brands-heading">Authorized Dealer & <span>Brand Partners</span></h2>
           <p class="section-subtitle">
             We procure and install 100% genuine components backed by original OEM test certifications and national warranties.
@@ -705,7 +779,7 @@
           <!-- Category 1 -->
           <div class="brand-category-card reveal reveal-delay-1">
             <h3 class="brand-category-title">
-              <i class="fas fa-plug" aria-hidden="true"></i> Cables & Conductors
+              <i data-lucide="plug-2"></i> Cables & Conductors
             </h3>
             <div class="brand-pill-grid">
               <span class="brand-pill">Havells</span>
@@ -721,7 +795,7 @@
           <!-- Category 2 -->
           <div class="brand-category-card reveal reveal-delay-2">
             <h3 class="brand-category-title">
-              <i class="fas fa-sliders" aria-hidden="true"></i> Switchgear & Panels
+              <i data-lucide="sliders"></i> Switchgear & Panels
             </h3>
             <div class="brand-pill-grid">
               <span class="brand-pill">ABB</span>
@@ -737,7 +811,7 @@
           <!-- Category 3 -->
           <div class="brand-category-card reveal reveal-delay-3">
             <h3 class="brand-category-title">
-              <i class="fas fa-toggle-on" aria-hidden="true"></i> Switches & Automation
+              <i data-lucide="toggle-right"></i> Switches & Automation
             </h3>
             <div class="brand-pill-grid">
               <span class="brand-pill">Anchor</span>
@@ -751,53 +825,83 @@
           </div>
         </div>
 
-        <!-- Continuous Infinite Marquee -->
-        <div class="marquee-container reveal">
-          <div class="marquee-track">
-            <div class="marquee-item"><i class="fas fa-circle-check"></i> Havells</div>
-            <div class="marquee-item"><i class="fas fa-circle-check"></i> ABB</div>
-            <div class="marquee-item"><i class="fas fa-circle-check"></i> Schneider Electric</div>
-            <div class="marquee-item"><i class="fas fa-circle-check"></i> L&T Electrical</div>
-            <div class="marquee-item"><i class="fas fa-circle-check"></i> Siemens</div>
-            <div class="marquee-item"><i class="fas fa-circle-check"></i> Polycab</div>
-            <div class="marquee-item"><i class="fas fa-circle-check"></i> KEI Wires</div>
-            <div class="marquee-item"><i class="fas fa-circle-check"></i> RR Kabel</div>
-            <div class="marquee-item"><i class="fas fa-circle-check"></i> Finolex</div>
-            <div class="marquee-item"><i class="fas fa-circle-check"></i> V-Guard</div>
-            <div class="marquee-item"><i class="fas fa-circle-check"></i> Legrand</div>
-            <div class="marquee-item"><i class="fas fa-circle-check"></i> C&S Electric</div>
-            <!-- Duplicated for seamless infinite loop -->
-            <div class="marquee-item"><i class="fas fa-circle-check"></i> Havells</div>
-            <div class="marquee-item"><i class="fas fa-circle-check"></i> ABB</div>
-            <div class="marquee-item"><i class="fas fa-circle-check"></i> Schneider Electric</div>
-            <div class="marquee-item"><i class="fas fa-circle-check"></i> L&T Electrical</div>
-            <div class="marquee-item"><i class="fas fa-circle-check"></i> Siemens</div>
-            <div class="marquee-item"><i class="fas fa-circle-check"></i> Polycab</div>
-            <div class="marquee-item"><i class="fas fa-circle-check"></i> KEI Wires</div>
-            <div class="marquee-item"><i class="fas fa-circle-check"></i> RR Kabel</div>
-            <div class="marquee-item"><i class="fas fa-circle-check"></i> Finolex</div>
-            <div class="marquee-item"><i class="fas fa-circle-check"></i> V-Guard</div>
-            <div class="marquee-item"><i class="fas fa-circle-check"></i> Legrand</div>
-            <div class="marquee-item"><i class="fas fa-circle-check"></i> C&S Electric</div>
+        <!-- Dual Continuous Infinite Marquee -->
+        <div class="marquee-wrapper reveal">
+          <!-- Marquee Row 1: Leftward -->
+          <div class="marquee-container">
+            <div class="marquee-track">
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> Havells</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> ABB</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> Schneider Electric</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> L&T Electrical</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> Siemens</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> Polycab</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> KEI Wires</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> RR Kabel</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> Finolex</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> V-Guard</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> Legrand</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> C&S Electric</div>
+              <!-- Duplicated for seamless loop -->
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> Havells</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> ABB</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> Schneider Electric</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> L&T Electrical</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> Siemens</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> Polycab</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> KEI Wires</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> RR Kabel</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> Finolex</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> V-Guard</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> Legrand</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> C&S Electric</div>
+            </div>
+          </div>
+
+          <!-- Marquee Row 2: Rightward (Reverse Flow) -->
+          <div class="marquee-container">
+            <div class="marquee-track marquee-track-reverse">
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> Goldmedal</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> Anchor</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> GM Modular</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> Wipro Lighting</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> Crompton</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> Universal Cables</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> Delta Electronics</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> Omron Automation</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> HPL Electric</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> IndoAsian</div>
+              <!-- Duplicated for seamless reverse loop -->
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> Goldmedal</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> Anchor</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> GM Modular</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> Wipro Lighting</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> Crompton</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> Universal Cables</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> Delta Electronics</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> Omron Automation</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> HPL Electric</div>
+              <div class="marquee-item"><i data-lucide="check-circle-2"></i> IndoAsian</div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- =========================================================================
-         SECTION 8: ABOUT US (Split Story + Trust Badges)
+         SECTION 8: ABOUT US (Asymmetric Frame + 4 Elevated Badges)
          ========================================================================= -->
     <section class="about-section section-spacing" id="about" aria-labelledby="about-heading">
       <div class="container">
         <div class="about-grid">
-          <!-- Visual Column -->
+          <!-- Visual Column with Asymmetric Wireframe -->
           <div class="about-visual-box reveal">
-            <div class="about-image-wrapper">
-              <img src="assets/images/about.webp" alt="Power Solutions engineers at work" loading="lazy" decoding="async" width="600" height="700">
+            <div class="about-image-wrapper circuit-frame">
+              <img src="assets/images/about.webp" alt="Power Solutions engineers at work on industrial electrical installation" loading="lazy" decoding="async" width="600" height="700">
             </div>
             <!-- Floating Credential Card -->
             <div class="about-cert-card">
-              <i class="fas fa-certificate about-cert-icon" aria-hidden="true"></i>
+              <i data-lucide="award" class="about-cert-icon"></i>
               <div class="about-cert-text">
                 <strong>Class "A" Licensed</strong>
                 <span>Govt. of Punjab Certified Contractor</span>
@@ -807,9 +911,7 @@
 
           <!-- Narrative Column -->
           <div class="about-story reveal reveal-delay-1">
-            <span class="section-eyebrow">
-              <i class="fas fa-building" aria-hidden="true"></i> Who We Are
-            </span>
+            <span class="section-eyebrow">Who We Are</span>
             <h2 class="section-title" id="about-heading">Delivering Proven <span>Electrical Mastery</span></h2>
             <p class="about-desc">
               <strong>Power Solutions</strong> is a certified Class "A" electrical contractor recognized by the Government of Punjab. We engineer, manufacture, and commission critical electrical infrastructure for leading manufacturing plants, IT parks, commercial institutions, and government facilities.
@@ -818,11 +920,11 @@
               As an MSME-registered enterprise (UDYAM-PB-20-0103957) and fully GST-compliant firm, we partner with premier manufacturers including ABB, Schneider, Havells, L&T, and Siemens to assure uncompromising durability, safety compliance, and seamless execution.
             </p>
 
-            <!-- 4 Trust Badges -->
+            <!-- 4 Elevated Trust Badges -->
             <div class="about-features-grid">
               <div class="about-feature-item">
                 <div class="about-feature-icon">
-                  <i class="fas fa-award" aria-hidden="true"></i>
+                  <i data-lucide="award"></i>
                 </div>
                 <div class="about-feature-text">
                   <h4>MSME Registered</h4>
@@ -832,7 +934,7 @@
 
               <div class="about-feature-item">
                 <div class="about-feature-icon">
-                  <i class="fas fa-file-invoice-dollar" aria-hidden="true"></i>
+                  <i data-lucide="receipt"></i>
                 </div>
                 <div class="about-feature-text">
                   <h4>GST Compliant</h4>
@@ -842,7 +944,7 @@
 
               <div class="about-feature-item">
                 <div class="about-feature-icon">
-                  <i class="fas fa-users-gear" aria-hidden="true"></i>
+                  <i data-lucide="users"></i>
                 </div>
                 <div class="about-feature-text">
                   <h4>Expert Engineers</h4>
@@ -852,7 +954,7 @@
 
               <div class="about-feature-item">
                 <div class="about-feature-icon">
-                  <i class="fas fa-shield-halved" aria-hidden="true"></i>
+                  <i data-lucide="shield-check"></i>
                 </div>
                 <div class="about-feature-text">
                   <h4>Quality Assured</h4>
@@ -866,14 +968,12 @@
     </section>
 
     <!-- =========================================================================
-         SECTION 9: TESTIMONIALS CAROUSEL
+         SECTION 9: TESTIMONIALS (Decorative Quotes & Timed Carousel)
          ========================================================================= -->
     <section class="testimonials-section section-spacing" id="testimonials" aria-labelledby="testimonials-heading">
       <div class="container">
-        <div class="section-header reveal">
-          <span class="section-eyebrow">
-            <i class="fas fa-comments" aria-hidden="true"></i> Client Confidence
-          </span>
+        <div class="section-header reveal-heading">
+          <span class="section-eyebrow">Client Confidence</span>
           <h2 class="section-title" id="testimonials-heading">What Our <span>Clients Say</span></h2>
           <p class="section-subtitle">
             Reputation forged through punctuality, uncompromising technical precision, and genuine components.
@@ -885,13 +985,13 @@
             <!-- Testimonial 1 -->
             <div class="testimonial-slide">
               <div class="testimonial-card">
-                <i class="fas fa-quote-right testimonial-quote-icon" aria-hidden="true"></i>
+                <div class="testimonial-quote-icon">“</div>
                 <div class="testimonial-rating" aria-label="5 out of 5 stars">
-                  <i class="fas fa-star" aria-hidden="true"></i>
-                  <i class="fas fa-star" aria-hidden="true"></i>
-                  <i class="fas fa-star" aria-hidden="true"></i>
-                  <i class="fas fa-star" aria-hidden="true"></i>
-                  <i class="fas fa-star" aria-hidden="true"></i>
+                  <i data-lucide="star"></i>
+                  <i data-lucide="star"></i>
+                  <i data-lucide="star"></i>
+                  <i data-lucide="star"></i>
+                  <i data-lucide="star"></i>
                 </div>
                 <p class="testimonial-text">
                   "Power Solutions handled our entire industrial factory electrical setup with extraordinary professionalism. Their engineering team is punctual, technically astute, and delivered clean CEIG approvals on schedule. Highly recommended for heavy manufacturing setups."
@@ -909,13 +1009,13 @@
             <!-- Testimonial 2 -->
             <div class="testimonial-slide">
               <div class="testimonial-card">
-                <i class="fas fa-quote-right testimonial-quote-icon" aria-hidden="true"></i>
+                <div class="testimonial-quote-icon">“</div>
                 <div class="testimonial-rating" aria-label="5 out of 5 stars">
-                  <i class="fas fa-star" aria-hidden="true"></i>
-                  <i class="fas fa-star" aria-hidden="true"></i>
-                  <i class="fas fa-star" aria-hidden="true"></i>
-                  <i class="fas fa-star" aria-hidden="true"></i>
-                  <i class="fas fa-star" aria-hidden="true"></i>
+                  <i data-lucide="star"></i>
+                  <i data-lucide="star"></i>
+                  <i data-lucide="star"></i>
+                  <i data-lucide="star"></i>
+                  <i data-lucide="star"></i>
                 </div>
                 <p class="testimonial-text">
                   "We have relied on Power Solutions for our LT & HT panel maintenance and substation servicing for the past 3 years. Their prompt responsiveness, authentic spare parts from Schneider and ABB, and safety rigor give us total peace of mind."
@@ -933,13 +1033,13 @@
             <!-- Testimonial 3 -->
             <div class="testimonial-slide">
               <div class="testimonial-card">
-                <i class="fas fa-quote-right testimonial-quote-icon" aria-hidden="true"></i>
+                <div class="testimonial-quote-icon">“</div>
                 <div class="testimonial-rating" aria-label="5 out of 5 stars">
-                  <i class="fas fa-star" aria-hidden="true"></i>
-                  <i class="fas fa-star" aria-hidden="true"></i>
-                  <i class="fas fa-star" aria-hidden="true"></i>
-                  <i class="fas fa-star" aria-hidden="true"></i>
-                  <i class="fas fa-star" aria-hidden="true"></i>
+                  <i data-lucide="star"></i>
+                  <i data-lucide="star"></i>
+                  <i data-lucide="star"></i>
+                  <i data-lucide="star"></i>
+                  <i data-lucide="star"></i>
                 </div>
                 <p class="testimonial-text">
                   "Outstanding turnkey execution for our multi-story commercial hub. From main LT distribution boards to complete floor metering and outdoor floodlighting, their work passed all electrical safety audits without a single hitch."
@@ -955,10 +1055,10 @@
             </div>
           </div>
 
-          <!-- Controls -->
+          <!-- Navigation & Indicators -->
           <div class="testimonials-nav">
             <button class="testimonial-btn" id="test-prev" aria-label="Previous Testimonial">
-              <i class="fas fa-chevron-left" aria-hidden="true"></i>
+              <i data-lucide="chevron-left"></i>
             </button>
             <div class="testimonial-dots" role="tablist" aria-label="Testimonial Indicators">
               <span class="testimonial-dot active" role="tab" aria-selected="true"></span>
@@ -966,7 +1066,7 @@
               <span class="testimonial-dot" role="tab" aria-selected="false"></span>
             </div>
             <button class="testimonial-btn" id="test-next" aria-label="Next Testimonial">
-              <i class="fas fa-chevron-right" aria-hidden="true"></i>
+              <i data-lucide="chevron-right"></i>
             </button>
           </div>
         </div>
@@ -978,10 +1078,8 @@
          ========================================================================= -->
     <section class="contact-section section-spacing" id="contact" aria-labelledby="contact-heading">
       <div class="container">
-        <div class="section-header reveal">
-          <span class="section-eyebrow">
-            <i class="fas fa-envelope-open-text" aria-hidden="true"></i> Direct Consultation
-          </span>
+        <div class="section-header reveal-heading">
+          <span class="section-eyebrow">Direct Consultation</span>
           <h2 class="section-title" id="contact-heading">Get in Touch with <span>Our Engineers</span></h2>
           <p class="section-subtitle">
             Have an electrical requirement, tender, or panel specification? Request a free engineering assessment and detailed quotation.
@@ -989,16 +1087,19 @@
         </div>
 
         <div class="contact-layout">
-          <!-- Contact Info Cards -->
+          <!-- Left: Contact Cards -->
           <div class="contact-info-panel reveal">
             <!-- Phone -->
             <div class="contact-info-card">
               <div class="contact-card-icon">
-                <i class="fas fa-phone-alt" aria-hidden="true"></i>
+                <i data-lucide="phone"></i>
               </div>
               <div class="contact-card-body">
                 <h4>Direct Telephone</h4>
-                <a href="tel:+916283027340">+91 6283027340</a>
+                <div class="contact-numbers">
+                  <a href="tel:+916283027340">+91 6283027340</a><span class="num-comma">,</span>
+                  <a href="tel:+918968972704">+91 8968972704</a>
+                </div>
                 <p>Mon–Sat: 9:00 AM – 7:00 PM</p>
               </div>
             </div>
@@ -1006,11 +1107,14 @@
             <!-- WhatsApp -->
             <div class="contact-info-card">
               <div class="contact-card-icon" style="color: #25d366; background: rgba(37, 211, 102, 0.1);">
-                <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                <i data-lucide="message-circle"></i>
               </div>
               <div class="contact-card-body">
                 <h4>WhatsApp Support</h4>
-                <a href="https://wa.me/916283027340" target="_blank" rel="noopener noreferrer">+91 6283027340</a>
+                <div class="contact-numbers">
+                  <a href="https://wa.me/916283027340" target="_blank" rel="noopener noreferrer">+91 6283027340</a><span class="num-comma">,</span>
+                  <a href="https://wa.me/918968972704" target="_blank" rel="noopener noreferrer">+91 8968972704</a>
+                </div>
                 <p>Instant quotes & drawings exchange</p>
               </div>
             </div>
@@ -1018,7 +1122,7 @@
             <!-- Email -->
             <div class="contact-info-card">
               <div class="contact-card-icon">
-                <i class="fas fa-envelope" aria-hidden="true"></i>
+                <i data-lucide="mail"></i>
               </div>
               <div class="contact-card-body">
                 <h4>Official Email</h4>
@@ -1030,22 +1134,22 @@
             <!-- Address -->
             <div class="contact-info-card">
               <div class="contact-card-icon">
-                <i class="fas fa-location-dot" aria-hidden="true"></i>
+                <i data-lucide="map-pin"></i>
               </div>
               <div class="contact-card-body">
                 <h4>Registered Office</h4>
-                <p>16, Sawraj Enclave, Near Shivalik City,<br>Kharar – 140301, Punjab, India</p>
+                <p>Office no 12A, Plot no E 45, Phase 8 Industrial Area,<br>Mohali, Punjab, India</p>
               </div>
             </div>
 
             <!-- Credential Note -->
             <div class="contact-cert-badge">
-              <i class="fas fa-award" aria-hidden="true"></i>
+              <i data-lucide="award"></i>
               <span>Class "A" Licensed Electrical Contractor — Government of Punjab Certified</span>
             </div>
           </div>
 
-          <!-- Validated Form Box -->
+          <!-- Right: Validated Form Box -->
           <div class="contact-form-box reveal reveal-delay-1">
             <h3>Request a Quote</h3>
             <p>Fill out the project scope below. Our licensed engineers will respond promptly.</p>
@@ -1099,7 +1203,7 @@
               <!-- Submit Button -->
               <button type="submit" class="btn btn-primary btn-block" id="form-submit-btn" style="margin-top: 1.5rem;">
                 <span>Submit Inquiry</span>
-                <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                <i data-lucide="send"></i>
               </button>
 
               <!-- Feedback Notice -->
@@ -1111,14 +1215,12 @@
     </section>
 
     <!-- =========================================================================
-         SECTION: FREQUENTLY ASKED QUESTIONS (SEO & Topical Authority)
+         SECTION 11: FREQUENTLY ASKED QUESTIONS (SEO & Topical Authority)
          ========================================================================= -->
     <section class="faq-section section-spacing" id="faq" aria-labelledby="faq-heading">
       <div class="container">
-        <div class="section-header reveal">
-          <span class="section-eyebrow">
-            <i class="fas fa-circle-question" aria-hidden="true"></i> Technical Guidance
-          </span>
+        <div class="section-header reveal-heading">
+          <span class="section-eyebrow">Technical Guidance</span>
           <h2 class="section-title" id="faq-heading">Frequently Asked <span>Questions</span></h2>
           <p class="section-subtitle">
             Essential answers on electrical licensing, HT/LT compliance, panel design, and government certifications.
@@ -1130,7 +1232,7 @@
           <div class="faq-item active">
             <button class="faq-header" type="button" aria-expanded="true">
               <span>What credentials does a Class "A" Licensed Electrical Contractor hold in Punjab?</span>
-              <span class="faq-icon"><i class="fas fa-chevron-down" aria-hidden="true"></i></span>
+              <span class="faq-icon"><i data-lucide="chevron-down"></i></span>
             </button>
             <div class="faq-body">
               <p>
@@ -1143,7 +1245,7 @@
           <div class="faq-item">
             <button class="faq-header" type="button" aria-expanded="false">
               <span>Which electrical brand partners does Power Solutions supply and install?</span>
-              <span class="faq-icon"><i class="fas fa-chevron-down" aria-hidden="true"></i></span>
+              <span class="faq-icon"><i data-lucide="chevron-down"></i></span>
             </button>
             <div class="faq-body">
               <p>
@@ -1156,7 +1258,7 @@
           <div class="faq-item">
             <button class="faq-header" type="button" aria-expanded="false">
               <span>What types of custom electrical panels do you engineer and manufacture?</span>
-              <span class="faq-icon"><i class="fas fa-chevron-down" aria-hidden="true"></i></span>
+              <span class="faq-icon"><i data-lucide="chevron-down"></i></span>
             </button>
             <div class="faq-body">
               <p>
@@ -1169,7 +1271,7 @@
           <div class="faq-item">
             <button class="faq-header" type="button" aria-expanded="false">
               <span>Do you assist with CEIG safety inspections and statutory clearances?</span>
-              <span class="faq-icon"><i class="fas fa-chevron-down" aria-hidden="true"></i></span>
+              <span class="faq-icon"><i data-lucide="chevron-down"></i></span>
             </button>
             <div class="faq-body">
               <p>
@@ -1182,11 +1284,11 @@
           <div class="faq-item">
             <button class="faq-header" type="button" aria-expanded="false">
               <span>What regions and cities in Punjab and North India do you serve?</span>
-              <span class="faq-icon"><i class="fas fa-chevron-down" aria-hidden="true"></i></span>
+              <span class="faq-icon"><i data-lucide="chevron-down"></i></span>
             </button>
             <div class="faq-body">
               <p>
-                Our central facility is at 16, Sawraj Enclave, Near Shivalik City, Kharar – 140301, Punjab. We regularly execute turnkey projects across Mohali, Kharar, Chandigarh, Panchkula, Zirakpur, Ludhiana, Jalandhar, Patiala, and throughout North India.
+                Our central facility is at Office no 12A plot no E 45 phase 8 industrial area Mohali, Punjab. We regularly execute turnkey projects across Mohali, Kharar, Chandigarh, Panchkula, Zirakpur, Ludhiana, Jalandhar, Patiala, and throughout North India.
               </p>
             </div>
           </div>
@@ -1195,7 +1297,7 @@
           <div class="faq-item">
             <button class="faq-header" type="button" aria-expanded="false">
               <span>What are your official Government registration credentials?</span>
-              <span class="faq-icon"><i class="fas fa-chevron-down" aria-hidden="true"></i></span>
+              <span class="faq-icon"><i data-lucide="chevron-down"></i></span>
             </button>
             <div class="faq-body">
               <p>
@@ -1208,38 +1310,38 @@
     </section>
 
     <!-- =========================================================================
-         SECTION 11: HIGH-IMPACT CTA BANNER
+         SECTION 12: HIGH-IMPACT CTA BANNER (Angled Break-The-Grid Section)
          ========================================================================= -->
-    <section class="cta-banner-section" id="cta" aria-labelledby="cta-heading">
+    <section class="cta-banner-section dark-section" id="cta" aria-labelledby="cta-heading">
       <div class="container">
         <div class="cta-banner-content reveal">
           <span class="cta-banner-badge">
-            <i class="fas fa-certificate" aria-hidden="true"></i> Class "A" Licensed • Govt. of Punjab Certified
+            <i data-lucide="award"></i> Class "A" Licensed • Govt. of Punjab Certified
           </span>
-          <h2 class="cta-banner-heading" id="cta-heading">Ready to Transform Your Business?</h2>
+          <h2 class="cta-banner-heading" id="cta-heading">Ready to Power Your Next Industrial Project?</h2>
           <p class="cta-banner-subheading">
-            Join hundreds of satisfied clients who trust us to deliver scalable, proven electrical infrastructure and precision panel solutions.
+            Join hundreds of satisfied manufacturing, commercial, and infrastructure clients who trust Power Solutions for reliable, certified execution.
           </p>
 
           <a href="tel:+916283027340" class="cta-call-btn" aria-label="Call Power Solutions directly">
-            <i class="fas fa-phone-alt" aria-hidden="true"></i>
-            <span>Make a Call</span>
-            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+            <i data-lucide="phone"></i>
+            <span>Speak with an Engineer</span>
+            <i data-lucide="arrow-right"></i>
           </a>
 
           <!-- Trust chips -->
           <div class="cta-trust-chips">
             <div class="trust-chip">
-              <i class="fas fa-shield-alt" aria-hidden="true"></i>
+              <i data-lucide="shield-check"></i>
               <span>100% Confidential</span>
             </div>
             <div class="trust-chip">
-              <i class="fas fa-clock" aria-hidden="true"></i>
-              <span>24/7 Emergency Support</span>
+              <i data-lucide="clock"></i>
+              <span>Rapid Site Inspection</span>
             </div>
             <div class="trust-chip">
-              <i class="fas fa-check-circle" aria-hidden="true"></i>
-              <span>Proven Results</span>
+              <i data-lucide="check-circle-2"></i>
+              <span>Statutory CEIG Clearances</span>
             </div>
           </div>
         </div>
@@ -1248,7 +1350,7 @@
   </main>
 
   <!-- =========================================================================
-       SECTION 12: COMPREHENSIVE FOOTER
+       SECTION 13: COMPREHENSIVE FOOTER
        ========================================================================= -->
   <footer class="footer" role="contentinfo">
     <div class="container">
@@ -1256,18 +1358,18 @@
         <!-- Col 1: Brand & Registrations -->
         <div class="footer-col">
           <a href="#home" class="footer-logo" aria-label="Power Solutions Home">
-            <img src="assets/images/logo.svg" alt="Power Solutions Logo" width="220" height="46">
+            <img id="footer-site-logo" src="assets/images/logo.svg" alt="Power Solutions Logo" width="220" height="46">
           </a>
           <p class="footer-brand-p">
             Professional Class "A" licensed electrical contractor specializing in LT & HT works, custom panel manufacturing, automation, and industrial electrical solutions.
           </p>
           <div class="footer-compliance-pills">
             <div class="compliance-pill">
-              <i class="fas fa-certificate" aria-hidden="true"></i>
+              <i data-lucide="award"></i>
               <span>UDYAM: UDYAM-PB-20-0103957</span>
             </div>
             <div class="compliance-pill">
-              <i class="fas fa-file-invoice" aria-hidden="true"></i>
+              <i data-lucide="receipt"></i>
               <span>GSTIN: 03BFVPT8691B1ZB</span>
             </div>
           </div>
@@ -1277,12 +1379,12 @@
         <div class="footer-col">
           <h3 class="footer-col-title">Quick Links</h3>
           <ul class="footer-link-list">
-            <li><a href="#home"><i class="fas fa-chevron-right" aria-hidden="true"></i> Home</a></li>
-            <li><a href="#services"><i class="fas fa-chevron-right" aria-hidden="true"></i> Services</a></li>
-            <li><a href="#projects"><i class="fas fa-chevron-right" aria-hidden="true"></i> Projects</a></li>
-            <li><a href="#brands"><i class="fas fa-chevron-right" aria-hidden="true"></i> Authorized Partners</a></li>
-            <li><a href="#about"><i class="fas fa-chevron-right" aria-hidden="true"></i> About Us</a></li>
-            <li><a href="#contact"><i class="fas fa-chevron-right" aria-hidden="true"></i> Contact</a></li>
+            <li><a href="#home"><i data-lucide="chevron-right"></i> Home</a></li>
+            <li><a href="#services"><i data-lucide="chevron-right"></i> Services</a></li>
+            <li><a href="#projects"><i data-lucide="chevron-right"></i> Projects</a></li>
+            <li><a href="#brands"><i data-lucide="chevron-right"></i> Authorized Partners</a></li>
+            <li><a href="#about"><i data-lucide="chevron-right"></i> About Us</a></li>
+            <li><a href="#contact"><i data-lucide="chevron-right"></i> Contact</a></li>
           </ul>
         </div>
 
@@ -1290,12 +1392,12 @@
         <div class="footer-col">
           <h3 class="footer-col-title">Our Services</h3>
           <ul class="footer-link-list">
-            <li><a href="#services"><i class="fas fa-chevron-right" aria-hidden="true"></i> LT & HT Electrical Works</a></li>
-            <li><a href="#services"><i class="fas fa-chevron-right" aria-hidden="true"></i> Panel Manufacturing</a></li>
-            <li><a href="#services"><i class="fas fa-chevron-right" aria-hidden="true"></i> Automation & SCADA Works</a></li>
-            <li><a href="#services"><i class="fas fa-chevron-right" aria-hidden="true"></i> Authorized Electrical Supply</a></li>
-            <li><a href="#services"><i class="fas fa-chevron-right" aria-hidden="true"></i> Earthing Materials</a></li>
-            <li><a href="#services"><i class="fas fa-chevron-right" aria-hidden="true"></i> Street Light Infrastructure</a></li>
+            <li><a href="#services"><i data-lucide="chevron-right"></i> LT & HT Electrical Works</a></li>
+            <li><a href="#services"><i data-lucide="chevron-right"></i> Panel Manufacturing</a></li>
+            <li><a href="#services"><i data-lucide="chevron-right"></i> Automation & SCADA Works</a></li>
+            <li><a href="#services"><i data-lucide="chevron-right"></i> Authorized Electrical Supply</a></li>
+            <li><a href="#services"><i data-lucide="chevron-right"></i> Earthing Materials</a></li>
+            <li><a href="#services"><i data-lucide="chevron-right"></i> Street Light Infrastructure</a></li>
           </ul>
         </div>
 
@@ -1304,23 +1406,29 @@
           <h3 class="footer-col-title">Contact Us</h3>
           <ul class="footer-contact-list">
             <li class="footer-contact-item">
-              <i class="fas fa-location-dot" aria-hidden="true"></i>
-              <span>16, Sawraj Enclave, Near Shivalik City, Kharar – 140301, Punjab</span>
+              <i data-lucide="map-pin"></i>
+              <span>Office no 12A plot no E 45 phase 8 industrial area Mohali, Punjab</span>
             </li>
             <li class="footer-contact-item">
-              <i class="fas fa-phone-alt" aria-hidden="true"></i>
-              <a href="tel:+916283027340">+91 6283027340</a>
+              <i data-lucide="phone"></i>
+              <span class="footer-contact-numbers">
+                <a href="tel:+916283027340">+91 6283027340</a><span class="num-comma">,</span>
+                <a href="tel:+918968972704">+91 8968972704</a>
+              </span>
             </li>
             <li class="footer-contact-item">
-              <i class="fab fa-whatsapp" aria-hidden="true"></i>
-              <a href="https://wa.me/916283027340" target="_blank" rel="noopener noreferrer">+91 6283027340</a>
+              <i data-lucide="message-circle"></i>
+              <span class="footer-contact-numbers">
+                <a href="https://wa.me/916283027340" target="_blank" rel="noopener noreferrer">+91 6283027340</a><span class="num-comma">,</span>
+                <a href="https://wa.me/918968972704" target="_blank" rel="noopener noreferrer">+91 8968972704</a>
+              </span>
             </li>
             <li class="footer-contact-item">
-              <i class="fas fa-envelope" aria-hidden="true"></i>
+              <i data-lucide="mail"></i>
               <a href="mailto:powersolutions@zohomail.in">powersolutions@zohomail.in</a>
             </li>
             <li class="footer-contact-item">
-              <i class="fas fa-clock" aria-hidden="true"></i>
+              <i data-lucide="clock"></i>
               <span>Mon–Sat: 9:00 AM – 7:00 PM<br>(Sunday Closed)</span>
             </li>
           </ul>
@@ -1336,52 +1444,157 @@
   </footer>
 
   <!-- =========================================================================
-       SECTION 13: PERSISTENT FLOATING ACTIONS (WhatsApp + Call)
+       SECTION 14: PERSISTENT FLOATING ACTIONS (WhatsApp + Call)
        ========================================================================= -->
   <div class="floating-actions" aria-label="Direct Chat Actions">
     <a href="https://wa.me/916283027340?text=Hello%20Power%20Solutions%2C%20I%20would%20like%20to%20inquire%20about%20electrical%20services" target="_blank" rel="noopener noreferrer" class="floating-whatsapp-btn" aria-label="Chat on WhatsApp with Power Solutions">
-      <i class="fab fa-whatsapp" aria-hidden="true"></i>
+      <i data-lucide="message-circle"></i>
     </a>
   </div>
 
   <!-- =========================================================================
-       SECTION 14: CONSULTATION ENTRY/EXIT-INTENT POPUP
+       SECTION 15: CONSULTATION ENTRY/EXIT-INTENT POPUP
        ========================================================================= -->
   <div class="consultation-popup" id="consultation-popup" role="dialog" aria-modal="true" aria-labelledby="popup-title">
     <div class="popup-card">
       <button class="popup-close-btn" id="popup-close" aria-label="Close Special Offer">
-        <i class="fas fa-times" aria-hidden="true"></i>
+        <i data-lucide="x"></i>
       </button>
       <span class="popup-badge">
-        <i class="fas fa-bolt" aria-hidden="true"></i> Free Technical Assessment
+        <i data-lucide="zap"></i> Free Technical Assessment
       </span>
       <h3 class="popup-title" id="popup-title">Plan Your Electrical Project with Experts</h3>
       <p class="popup-desc">
-        Need custom panel fabrication, LT/HT wiring, or an automation audit? Connect directly with our certified engineers for an obligation-free estimate and site consultation.
+        Need custom panel fabrication, LT/HT cabling, or an automation audit? Connect directly with our certified engineers for an obligation-free estimate and site consultation.
       </p>
       <div class="popup-actions">
-        <a href="tel:+916283027340" class="btn btn-primary btn-block">
-          <i class="fas fa-phone-alt" aria-hidden="true"></i>
-          <span>Call Now: +91 6283027340</span>
-        </a>
-        <a href="#contact" class="btn btn-outline btn-block" onclick="document.getElementById('consultation-popup').classList.remove('active')">
+        <div class="popup-phone-group">
+          <a href="tel:+916283027340" class="btn btn-primary btn-sm">
+            <i data-lucide="phone"></i>
+            <span>+91 6283027340</span>
+          </a>
+          <a href="tel:+918968972704" class="btn btn-primary btn-sm">
+            <i data-lucide="phone"></i>
+            <span>+91 8968972704</span>
+          </a>
+        </div>
+        <a href="#contact" class="btn btn-secondary btn-block" onclick="document.getElementById('consultation-popup').classList.remove('active')">
           <span>Request Detailed Callback</span>
         </a>
       </div>
       <div class="popup-trust-notes">
-        <span><i class="fas fa-check" aria-hidden="true"></i> Govt. Certified</span>
-        <span><i class="fas fa-check" aria-hidden="true"></i> 100% Genuine OEM</span>
-        <span><i class="fas fa-check" aria-hidden="true"></i> Free Assessment</span>
+        <span><i data-lucide="check-circle-2"></i> Govt. Certified</span>
+        <span><i data-lucide="check-circle-2"></i> 100% Genuine OEM</span>
+        <span><i data-lucide="check-circle-2"></i> Free Assessment</span>
       </div>
     </div>
   </div>
 
   <!-- =========================================================================
-       SECTION 15: BACK TO TOP BUTTON
+       SECTION 16: BACK TO TOP BUTTON
        ========================================================================= -->
   <button class="scroll-top-btn" id="scroll-to-top" aria-label="Scroll to top of page">
-    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    <i data-lucide="arrow-up"></i>
   </button>
+
+  <!-- =========================================================================
+       SECTION 17: NEW OFFICE GRAND OPENING INAUGURATION POPUP (< 14-09-2026 11:00 PM)
+       ========================================================================= -->
+  <div class="opening-modal-backdrop" id="opening-modal" role="dialog" aria-modal="true" aria-labelledby="opening-modal-title">
+    <!-- Full-screen Confetti & Celebration Vector Throwing Canvas -->
+    <canvas id="celebration-canvas" class="celebration-canvas"></canvas>
+
+    <div class="opening-modal-container">
+      <div class="opening-modal-card">
+        <!-- Close Button -->
+        <button class="opening-modal-close" id="opening-modal-close" aria-label="Close Grand Opening Invitation">
+          <i data-lucide="x"></i>
+        </button>
+
+        <!-- Festive Ribbon Badge -->
+        <div class="opening-badge-ribbon">
+          <span class="ribbon-sparkle">✨</span>
+          <span>GRAND OPENING INAUGURATION</span>
+          <span class="ribbon-sparkle">✨</span>
+        </div>
+
+        <!-- Heading & Welcome Wordings -->
+        <h2 class="opening-title" id="opening-modal-title">
+          We’re Expanding! <br><span>Join Us at Our New Facility</span>
+        </h2>
+        
+        <p class="opening-welcome-text">
+          With great joy and pride, <strong>Power Solutions</strong> cordially invites you to the grand opening celebration of our new corporate headquarters and advanced engineering facility in Mohali. Join us as we commemorate this exciting new chapter!
+        </p>
+
+        <!-- Live Countdown Timer -->
+        <div class="opening-countdown" id="opening-countdown">
+          <div class="countdown-unit">
+            <span class="countdown-number" id="countdown-hours">00</span>
+            <span class="countdown-label">HOURS</span>
+          </div>
+          <span class="countdown-sep">:</span>
+          <div class="countdown-unit">
+            <span class="countdown-number" id="countdown-minutes">00</span>
+            <span class="countdown-label">MINS</span>
+          </div>
+          <span class="countdown-sep">:</span>
+          <div class="countdown-unit">
+            <span class="countdown-number" id="countdown-seconds">00</span>
+            <span class="countdown-label">SECS</span>
+          </div>
+        </div>
+
+        <!-- Event Details Grid: Date, Time & Address -->
+        <div class="opening-details-grid">
+          <div class="opening-detail-item">
+            <div class="detail-icon"><i data-lucide="calendar"></i></div>
+            <div class="detail-info">
+              <span class="detail-label">Inauguration Day</span>
+              <strong>Monday, 14th Sept 2026</strong>
+            </div>
+          </div>
+          <div class="opening-detail-item">
+            <div class="detail-icon"><i data-lucide="clock"></i></div>
+            <div class="detail-info">
+              <span class="detail-label">Welcome Timing</span>
+              <strong>11:00 AM Onwards</strong>
+            </div>
+          </div>
+          <div class="opening-detail-item full-width">
+            <div class="detail-icon"><i data-lucide="map-pin"></i></div>
+            <div class="detail-info">
+              <span class="detail-label">Office & Facility Location</span>
+              <strong>Office no 12A, Plot no E 45, Phase 8 Industrial Area, Mohali, Punjab</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive RSVP / Action Buttons -->
+        <div class="opening-actions">
+          <a href="https://maps.google.com/?q=Plot+no+E+45+Phase+8+Industrial+Area+Mohali" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg opening-cta-btn">
+            <i data-lucide="navigation"></i>
+            <span>Get Directions / Join Us</span>
+          </a>
+          <div class="opening-phone-buttons">
+            <a href="tel:+916283027340" class="btn btn-secondary">
+              <i data-lucide="phone"></i>
+              <span>+91 6283027340</span>
+            </a>
+            <a href="tel:+918968972704" class="btn btn-secondary">
+              <i data-lucide="phone"></i>
+              <span>+91 8968972704</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Interactive Celebration Trigger -->
+        <button class="celebrate-again-btn" id="celebrate-again-btn" type="button" aria-label="Throw more celebration confetti">
+          <span>🎊 Celebrate Again</span>
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- Core JavaScript File -->
   <script src="assets/js/script.js"></script>

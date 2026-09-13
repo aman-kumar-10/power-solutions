@@ -1,22 +1,22 @@
 /**
- * Power Solutions — Core Interactive Script
- * Class "A" Licensed Electrical Contractor | Govt. of Punjab Certified
- * Vanilla ES6 — High Performance, Modular, Zero Dependencies
+ * Power Solutions — Industrial Precision Interactive & Motion Engine
+ * Class "A" Licensed Electrical Contractor | Government of Punjab Certified
+ * Pure Vanilla ES6 — Zero External Dependencies / High Performance
  */
 
 (function () {
   'use strict';
 
   // =========================================================================
-  // 1. SERVICES DATA CATALOG
+  // 1. SERVICES CATALOG (100% Preserved Data + Lucide Icon Mappings)
   // =========================================================================
   const servicesCatalog = [
     {
       id: 'lt-ht',
-      icon: 'fa-bolt',
+      icon: 'zap',
       title: 'LT & HT Electrical Works',
       shortDesc: 'End-to-end low and high tension electrical installations engineered for industrial plants, commercial towers, and substations.',
-      fullDesc: 'Power Solutions delivers certified Low Tension (up to 1kV) and High Tension (above 1kV) infrastructure. From transformer installations to HT/LT cabling, our government-certified team guarantees regulatory compliance and uncompromising safety.',
+      fullDesc: 'Power Solutions delivers certified Low Tension (up to 1kV) and High Tension (above 1kV up to 33kV) infrastructure. From transformer installations to HT/LT cabling, our government-certified team guarantees regulatory compliance and uncompromising safety.',
       features: [
         'HT Substation & Transformer Erection (up to 33kV)',
         'LT Distribution Systems & Heavy Cable Laying',
@@ -28,7 +28,7 @@
     },
     {
       id: 'panel',
-      icon: 'fa-industry',
+      icon: 'cpu',
       title: 'Panel Manufacturing & Assembly',
       shortDesc: 'Custom-engineered electrical control panels built with genuine switchgear from ABB, Schneider, L&T, and Siemens.',
       fullDesc: 'We manufacture customized electrical control panels meeting CPRI standards and industrial protocols. Every panel undergoes stringent multi-stage dielectric, continuity, and load testing prior to site commissioning.',
@@ -43,7 +43,7 @@
     },
     {
       id: 'automation',
-      icon: 'fa-microchip',
+      icon: 'activity',
       title: 'Automation & SCADA Works',
       shortDesc: 'Intelligent industrial automation, programmable logic controllers (PLC), and real-time SCADA monitoring systems.',
       fullDesc: 'Modernize manufacturing lines with smart automation. We program and commission robust PLC, HMI, and telemetry systems that maximize operational throughput while minimizing unplanned downtime.',
@@ -58,7 +58,7 @@
     },
     {
       id: 'supply',
-      icon: 'fa-boxes-stacked',
+      icon: 'boxes',
       title: 'Authorized Electrical Supply',
       shortDesc: 'Direct authorized distributor of premium electrical switchgear, HT/LT cables, and heavy-duty wiring accessories.',
       fullDesc: 'Guaranteed 100% genuine products sourced straight from top manufacturers with original test certificates and manufacturer warranty. We fulfill bulk requirements with fast-track supply chain delivery.',
@@ -73,7 +73,7 @@
     },
     {
       id: 'earthing',
-      icon: 'fa-shield-halved',
+      icon: 'shield-check',
       title: 'Earthing Materials & Protection',
       shortDesc: 'Advanced chemical earthing electrodes, copper/GI strips, and comprehensive lightning protection systems.',
       fullDesc: 'Safeguard vital equipment and human life against surges, phase faults, and direct lightning strikes. Our earthing solutions adhere to IS 3043 standards with low maintenance requirements.',
@@ -88,7 +88,7 @@
     },
     {
       id: 'street-light',
-      icon: 'fa-lightbulb',
+      icon: 'lightbulb',
       title: 'Street Lighting & Infrastructure',
       shortDesc: 'Turnkey municipal and residential street lighting systems, GI octagonal poles, and automated LED illumination.',
       fullDesc: 'Comprehensive street and campus illumination solutions from foundation casting to automated timer-controlled lighting. Designed for high wind-load tolerance, weather resilience, and maximum lumens per watt.',
@@ -104,15 +104,21 @@
   ];
 
   // =========================================================================
-  // 2. DOM CONTENT LOADED ENTRY POINT
+  // 2. DOM INITIALIZATION
   // =========================================================================
   document.addEventListener('DOMContentLoaded', () => {
+    initTheme();
+    initGrandOpeningModal();
+    refreshLucideIcons();
+    initScrollProgress();
     initNavigation();
     initHeroSlider();
+    initHeroParallax();
     initStatsCounters();
     initServices();
     initProjectGallery();
     initTestimonials();
+    initMagneticCTA();
     initContactForm();
     initConsultationPopup();
     initFaqAccordion();
@@ -120,8 +126,84 @@
     initScrollReveal();
   });
 
+  // Safe wrapper for Lucide Icons
+  function refreshLucideIcons() {
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+      window.lucide.createIcons();
+    }
+  }
+
   // =========================================================================
-  // 3. NAVIGATION, HEADER SCROLL & MOBILE DRAWER
+  // 2B. THEME SWITCHER (Light Mode Green+White Default <-> Dark Mode Pine/Obsidian)
+  // =========================================================================
+  function initTheme() {
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const headerLogo = document.getElementById('site-logo');
+    const mobileLogo = document.getElementById('mobile-site-logo');
+    const footerLogo = document.getElementById('footer-site-logo');
+
+    // Default to 'light' (Green and White)
+    const currentTheme = localStorage.getItem('ps_theme') || 'light';
+
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      try {
+        localStorage.setItem('ps_theme', theme);
+      } catch (e) {}
+
+      // Swap brand logo SVG for optimal contrast against light/dark header and footer
+      const logoPath = theme === 'dark' ? 'assets/images/logo-dark.svg' : 'assets/images/logo.svg';
+      if (headerLogo) {
+        headerLogo.src = logoPath;
+      }
+      if (mobileLogo) {
+        mobileLogo.src = logoPath;
+      }
+      if (footerLogo) {
+        footerLogo.src = logoPath;
+      }
+
+      if (themeToggleBtn) {
+        const isDark = theme === 'dark';
+        themeToggleBtn.setAttribute('aria-label', isDark ? 'Switch to Light Theme' : 'Switch to Dark Theme');
+        themeToggleBtn.setAttribute('title', isDark ? 'Switch to Light Theme' : 'Switch to Dark Theme');
+      }
+
+      refreshLucideIcons();
+    }
+
+    // Initialize with current or stored theme
+    applyTheme(currentTheme);
+
+    if (themeToggleBtn) {
+      themeToggleBtn.addEventListener('click', () => {
+        const activeTheme = document.documentElement.getAttribute('data-theme') || 'light';
+        const nextTheme = activeTheme === 'dark' ? 'light' : 'dark';
+        applyTheme(nextTheme);
+      });
+    }
+  }
+
+  // =========================================================================
+  // 3. REAL-TIME SCROLL PROGRESS BAR
+  // =========================================================================
+  function initScrollProgress() {
+    const progressBar = document.getElementById('scroll-progress');
+    if (!progressBar) return;
+
+    const updateProgress = () => {
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (docHeight <= 0) return;
+      const progress = (window.scrollY / docHeight) * 100;
+      progressBar.style.width = `${Math.min(100, Math.max(0, progress))}%`;
+    };
+
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+  }
+
+  // =========================================================================
+  // 4. NAVIGATION, SLIDING INDICATOR & MOBILE DRAWER
   // =========================================================================
   function initNavigation() {
     const header = document.getElementById('header');
@@ -130,16 +212,29 @@
     const mobileDrawer = document.getElementById('mobile-drawer');
     const mobileDrawerClose = document.getElementById('mobile-drawer-close');
     const mobileOverlay = document.getElementById('mobile-overlay');
+    const desktopNavMenu = document.querySelector('.desktop-nav-menu');
     const desktopNavLinks = document.querySelectorAll('.desktop-nav .nav-link');
     const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
     const drawerActionBtns = document.querySelectorAll('.mobile-drawer-footer a');
+    const navIndicator = document.getElementById('nav-indicator');
 
-    // Scroll state for sticky header & topbar collapse
+    // Reposition sliding active indicator pill
+    const updateNavIndicator = (activeLink) => {
+      if (!navIndicator || !activeLink || !desktopNavMenu) return;
+      const linkRect = activeLink.getBoundingClientRect();
+      const menuRect = desktopNavMenu.getBoundingClientRect();
+
+      navIndicator.style.width = `${linkRect.width}px`;
+      navIndicator.style.left = `${linkRect.left - menuRect.left}px`;
+      navIndicator.style.opacity = '1';
+    };
+
+    // Scroll state & scrollspy
     const handleScroll = () => {
       const scrollY = window.scrollY;
 
       if (topbar) {
-        if (scrollY > 50) {
+        if (scrollY > 40) {
           topbar.classList.add('collapsed');
         } else {
           topbar.classList.remove('collapsed');
@@ -154,12 +249,12 @@
         }
       }
 
-      // Active nav link highlight via scrollspy
+      // Scrollspy detection
       const sections = ['home', 'services', 'projects', 'brands', 'about', 'contact']
         .map(id => document.getElementById(id))
         .filter(Boolean);
 
-      const headerOffset = (header ? header.offsetHeight : 80) + 60;
+      const headerOffset = (header ? header.offsetHeight : 80) + 70;
       let activeSectionId = 'home';
 
       sections.forEach(sec => {
@@ -169,13 +264,18 @@
         }
       });
 
-      // Update desktop links
+      let currentActiveLink = null;
       desktopNavLinks.forEach(link => {
         const href = link.getAttribute('href');
-        link.classList.toggle('active', href === `#${activeSectionId}`);
+        const isActive = href === `#${activeSectionId}`;
+        link.classList.toggle('active', isActive);
+        if (isActive) currentActiveLink = link;
       });
 
-      // Update mobile drawer links
+      if (currentActiveLink) {
+        updateNavIndicator(currentActiveLink);
+      }
+
       mobileNavLinks.forEach(link => {
         const href = link.getAttribute('href');
         link.classList.toggle('active', href === `#${activeSectionId}`);
@@ -183,6 +283,23 @@
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', () => {
+      const activeLink = document.querySelector('.desktop-nav .nav-link.active');
+      if (activeLink) updateNavIndicator(activeLink);
+    });
+
+    // Hover effect on desktop links moves the pill smoothly
+    desktopNavLinks.forEach(link => {
+      link.addEventListener('mouseenter', () => updateNavIndicator(link));
+    });
+
+    if (desktopNavMenu) {
+      desktopNavMenu.addEventListener('mouseleave', () => {
+        const activeLink = document.querySelector('.desktop-nav .nav-link.active');
+        if (activeLink) updateNavIndicator(activeLink);
+      });
+    }
+
     handleScroll();
 
     // Mobile Drawer Controller
@@ -229,7 +346,7 @@
       });
     }
 
-    // Smooth scroll for anchor links with offset adjustment
+    // Smooth scroll for anchor links with header compensation
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         const targetId = this.getAttribute('href');
@@ -238,8 +355,8 @@
         const targetEl = document.querySelector(targetId);
         if (targetEl) {
           e.preventDefault();
-          const headerHeight = header ? header.offsetHeight : 70;
-          const targetTop = targetEl.offsetTop - headerHeight;
+          const headerHeight = header ? header.offsetHeight : 76;
+          const targetTop = targetEl.offsetTop - headerHeight + 5;
           window.scrollTo({
             top: Math.max(0, targetTop),
             behavior: 'smooth'
@@ -250,7 +367,7 @@
   }
 
   // =========================================================================
-  // 4. AUTO-SLIDING HERO (Crossfade + Touch Gestures + Autoplay)
+  // 5. HERO SLIDER (Crossfade + Scale Parallax + Gestures)
   // =========================================================================
   function initHeroSlider() {
     const slides = document.querySelectorAll('.hero-slide');
@@ -314,14 +431,11 @@
       });
     });
 
-    // Pause on mouse hover & resume on mouse leave
     if (sliderContainer) {
       sliderContainer.addEventListener('mouseenter', stopAutoplay);
       sliderContainer.addEventListener('mouseleave', startAutoplay);
-      sliderContainer.addEventListener('focusin', stopAutoplay);
-      sliderContainer.addEventListener('focusout', startAutoplay);
 
-      // Touch gesture support (swipe left / right)
+      // Touch gesture support
       let touchStartX = 0;
       let touchEndX = 0;
 
@@ -343,13 +457,42 @@
       }, { passive: true });
     }
 
-    // Initialize first slide & autoplay
     showSlide(0);
     startAutoplay();
   }
 
   // =========================================================================
-  // 5. ANIMATED STATS COUNTER
+  // 6. HERO PARALLAX FOR TRUST CHIPS (Desktop Mouse Interaction)
+  // =========================================================================
+  function initHeroParallax() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (window.innerWidth < 1100) return;
+
+    const heroSection = document.querySelector('.hero');
+    const chips = document.querySelectorAll('.hero-chip');
+
+    if (!heroSection || !chips.length) return;
+
+    heroSection.addEventListener('mousemove', (e) => {
+      const { clientX, clientY } = e;
+      const xPercent = (clientX / window.innerWidth - 0.5) * 2;
+      const yPercent = (clientY / window.innerHeight - 0.5) * 2;
+
+      chips.forEach((chip, i) => {
+        const factor = (i + 1) * 12;
+        chip.style.transform = `translate3d(${xPercent * factor}px, ${yPercent * factor}px, 0)`;
+      });
+    });
+
+    heroSection.addEventListener('mouseleave', () => {
+      chips.forEach(chip => {
+        chip.style.transform = 'translate3d(0, 0, 0)';
+      });
+    });
+  }
+
+  // =========================================================================
+  // 7. ANIMATED STATS COUNTER WITH EXPONENTIAL EASING
   // =========================================================================
   function initStatsCounters() {
     const counterElements = document.querySelectorAll('.stat-count');
@@ -357,15 +500,16 @@
 
     const animateCount = (el) => {
       const target = parseInt(el.getAttribute('data-target'), 10) || 0;
-      const duration = 1800;
+      const duration = 2000;
       const startTimestamp = performance.now();
 
-      const easeOutQuad = (t) => t * (2 - t);
+      // Weighted ease-out curve
+      const easeOutExpo = (x) => x === 1 ? 1 : 1 - Math.pow(2, -10 * x);
 
       const step = (currentTime) => {
         const elapsed = currentTime - startTimestamp;
         const progress = Math.min(elapsed / duration, 1);
-        const currentCount = Math.floor(easeOutQuad(progress) * target);
+        const currentCount = Math.floor(easeOutExpo(progress) * target);
 
         el.textContent = currentCount;
 
@@ -392,7 +536,7 @@
   }
 
   // =========================================================================
-  // 6. SERVICES RENDERING & DETAIL MODAL
+  // 8. SERVICES GRID & MODAL
   // =========================================================================
   function initServices() {
     const servicesGrid = document.getElementById('services-grid');
@@ -408,38 +552,44 @@
 
     // Render service cards dynamically
     servicesGrid.innerHTML = servicesCatalog.map((service, index) => `
-      <div class="service-card reveal reveal-delay-${(index % 3) + 1}" data-id="${service.id}">
+      <div class="service-card reveal reveal-delay-${(index % 3) + 1}" data-id="${service.id}" tabindex="0" role="button" aria-label="View specifications for ${service.title}">
         <div class="service-icon-halo">
-          <i class="fas ${service.icon}"></i>
+          <i data-lucide="${service.icon}"></i>
         </div>
         <h3 class="service-title">${service.title}</h3>
         <p class="service-desc">${service.shortDesc}</p>
         <ul class="service-features-list">
           ${service.features.slice(0, 3).map(feat => `
-            <li><i class="fas fa-circle-check"></i> <span>${feat}</span></li>
+            <li><i data-lucide="check-circle-2"></i> <span>${feat}</span></li>
           `).join('')}
         </ul>
-        <div class="service-action-link" role="button" tabindex="0">
-          <span>Explore Technical Specs</span>
-          <i class="fas fa-arrow-right"></i>
+        <div class="service-action-link">
+          <span>Technical Specifications</span>
+          <i data-lucide="arrow-right"></i>
         </div>
       </div>
     `).join('');
 
-    // Open Modal Details
+    refreshLucideIcons();
+
+    // Open Service Detail Modal
     const openServiceModal = (serviceId) => {
       const service = servicesCatalog.find(s => s.id === serviceId);
       if (!service || !modalBackdrop) return;
 
-      if (modalIcon) modalIcon.className = `fas ${service.icon}`;
+      if (modalIcon) {
+        modalIcon.setAttribute('data-lucide', service.icon);
+      }
       if (modalTitle) modalTitle.textContent = service.title;
       if (modalDesc) modalDesc.textContent = service.fullDesc;
 
       if (modalFeaturesList) {
         modalFeaturesList.innerHTML = service.features.map(f => `
-          <li><i class="fas fa-check-circle"></i> <span>${f}</span></li>
+          <li><i data-lucide="check-circle-2"></i> <span>${f}</span></li>
         `).join('');
       }
+
+      refreshLucideIcons();
 
       if (modalCta) {
         modalCta.href = '#contact';
@@ -463,7 +613,6 @@
       }
     };
 
-    // Attach click listeners to cards
     servicesGrid.querySelectorAll('.service-card').forEach(card => {
       const id = card.getAttribute('data-id');
       card.addEventListener('click', () => openServiceModal(id));
@@ -493,7 +642,7 @@
   }
 
   // =========================================================================
-  // 7. FILTERABLE PROJECT GALLERY
+  // 9. FILTERABLE PROJECT GALLERY
   // =========================================================================
   function initProjectGallery() {
     const filterButtons = document.querySelectorAll('.filter-btn');
@@ -513,9 +662,12 @@
           if (filterValue === 'all' || category === filterValue) {
             card.classList.remove('hide');
             card.style.opacity = '0';
+            card.style.transform = 'translateY(15px)';
             setTimeout(() => {
+              card.style.transition = 'opacity 0.4s var(--ease-precision), transform 0.4s var(--ease-precision)';
               card.style.opacity = '1';
-            }, 50);
+              card.style.transform = 'translateY(0)';
+            }, 30);
           } else {
             card.classList.add('hide');
           }
@@ -525,7 +677,7 @@
   }
 
   // =========================================================================
-  // 8. TESTIMONIALS SLIDER
+  // 10. TESTIMONIALS SLIDER WITH TIMED PROGRESS
   // =========================================================================
   function initTestimonials() {
     const track = document.getElementById('testimonials-track');
@@ -538,6 +690,7 @@
 
     let currentIndex = 0;
     let autoplayTimer = null;
+    const interval = 6500;
 
     const updateSlider = (index) => {
       currentIndex = (index + slides.length) % slides.length;
@@ -545,6 +698,7 @@
 
       dots.forEach((dot, i) => {
         dot.classList.toggle('active', i === currentIndex);
+        dot.setAttribute('aria-selected', i === currentIndex);
       });
     };
 
@@ -553,7 +707,7 @@
 
     const startTimer = () => {
       stopTimer();
-      autoplayTimer = setInterval(next, 6500);
+      autoplayTimer = setInterval(next, interval);
     };
 
     const stopTimer = () => {
@@ -581,7 +735,48 @@
   }
 
   // =========================================================================
-  // 9. CONTACT FORM VALIDATION & INTERACTIVE SUBMISSION
+  // 11. MAGNETIC CTA BUTTON & RIPPLE EFFECT
+  // =========================================================================
+  function initMagneticCTA() {
+    const magneticBtns = document.querySelectorAll('.cta-call-btn, .btn-primary');
+
+    magneticBtns.forEach(btn => {
+      // Magnetic pull effect on desktop
+      if (window.innerWidth >= 1024 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        btn.addEventListener('mousemove', (e) => {
+          const rect = btn.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          btn.style.transform = `translate(${x * 0.2}px, ${y * 0.25}px)`;
+        });
+
+        btn.addEventListener('mouseleave', () => {
+          btn.style.transform = 'translate(0, 0)';
+        });
+      }
+
+      // Micro-ripple on click
+      btn.addEventListener('click', function (e) {
+        const rect = this.getBoundingClientRect();
+        const ripple = document.createElement('span');
+        ripple.className = 'btn-ripple';
+        const diameter = Math.max(rect.width, rect.height);
+        const radius = diameter / 2;
+
+        ripple.style.width = ripple.style.height = `${diameter}px`;
+        ripple.style.left = `${e.clientX - rect.left - radius}px`;
+        ripple.style.top = `${e.clientY - rect.top - radius}px`;
+
+        const existingRipple = this.querySelector('.btn-ripple');
+        if (existingRipple) existingRipple.remove();
+
+        this.appendChild(ripple);
+      });
+    });
+  }
+
+  // =========================================================================
+  // 12. CONTACT FORM VALIDATION & SUBMISSION
   // =========================================================================
   function initContactForm() {
     const form = document.getElementById('contact-form');
@@ -601,10 +796,8 @@
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         isValid = emailRegex.test(value);
       } else if (type === 'phone' && value) {
-        // Strip spaces/dashes, match 10-digit phone
         const cleaned = value.replace(/[\s\-+]/g, '');
         const phoneRegex = /^[6-9]\d{9}$/;
-        // Or accept with +91 or 91
         const fullIndianRegex = /^(?:91)?[6-9]\d{9}$/;
         isValid = phoneRegex.test(cleaned) || fullIndianRegex.test(cleaned);
       } else if (type === 'message' && value) {
@@ -615,7 +808,6 @@
       return isValid;
     };
 
-    // Live validation on blur & input
     form.querySelectorAll('.form-control').forEach(input => {
       input.addEventListener('blur', () => validateField(input));
       input.addEventListener('input', () => {
@@ -640,25 +832,27 @@
       if (!formIsValid) {
         if (feedback) {
           feedback.className = 'form-feedback error';
-          feedback.innerHTML = '<i class="fas fa-triangle-exclamation"></i> Please fix the highlighted fields before submitting.';
+          feedback.innerHTML = '<i data-lucide="alert-triangle"></i> <span>Please fix the highlighted fields before submitting.</span>';
           feedback.style.display = 'flex';
+          refreshLucideIcons();
         }
         return;
       }
 
-      // Submission UI State (Loading Simulation)
       const originalText = submitBtn ? submitBtn.innerHTML : 'Submit';
       if (submitBtn) {
         submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing Request...';
+        submitBtn.innerHTML = '<i data-lucide="loader-2" class="lucide-spin"></i> <span>Processing Request...</span>';
+        refreshLucideIcons();
       }
 
-      // Simulated network dispatch
+      // Simulated dispatch
       setTimeout(() => {
         if (feedback) {
           feedback.className = 'form-feedback success';
-          feedback.innerHTML = '<i class="fas fa-circle-check"></i> Thank you! Your electrical inquiry has been received. Our team will contact you within 2 business hours.';
+          feedback.innerHTML = '<i data-lucide="check-circle-2"></i> <span>Thank you! Your electrical inquiry has been received. Our team will contact you within 2 business hours.</span>';
           feedback.style.display = 'flex';
+          refreshLucideIcons();
         }
 
         form.reset();
@@ -666,6 +860,7 @@
         if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.innerHTML = originalText;
+          refreshLucideIcons();
         }
 
         setTimeout(() => {
@@ -673,22 +868,24 @@
             feedback.style.display = 'none';
           }
         }, 8000);
-      }, 900);
+      }, 950);
     });
   }
 
   // =========================================================================
-  // 10. CONSULTATION POPUP (Exit-Intent / Delay Offer)
+  // 13. CONSULTATION POPUP (Exit-Intent / Fallback Delay)
   // =========================================================================
   function initConsultationPopup() {
     const popup = document.getElementById('consultation-popup');
     const closeBtn = document.getElementById('popup-close');
-    const STORAGE_KEY = 'ps_consultation_dismissed_session';
+    const STORAGE_KEY = 'ps_consultation_dismissed_v2';
 
     if (!popup) return;
 
     const openPopup = () => {
       if (sessionStorage.getItem(STORAGE_KEY)) return;
+      const openingModal = document.getElementById('opening-modal');
+      if (openingModal && openingModal.classList.contains('active')) return;
       popup.classList.add('active');
       sessionStorage.setItem(STORAGE_KEY, 'true');
     };
@@ -709,7 +906,7 @@
       }
     });
 
-    // Exit intent detection (cursor moves out of top viewport)
+    // Exit intent detection
     let triggered = false;
     document.addEventListener('mouseleave', (e) => {
       if (e.clientY <= 0 && !triggered) {
@@ -718,17 +915,17 @@
       }
     });
 
-    // Fallback delay trigger after 25 seconds
+    // Fallback trigger
     setTimeout(() => {
       if (!triggered) {
         triggered = true;
         openPopup();
       }
-    }, 25000);
+    }, 28000);
   }
 
   // =========================================================================
-  // 11. SCROLL TO TOP CONTROLLER
+  // 14. SCROLL TO TOP
   // =========================================================================
   function initScrollToTop() {
     const scrollBtn = document.getElementById('scroll-to-top');
@@ -751,26 +948,7 @@
   }
 
   // =========================================================================
-  // 12. SCROLL REVEAL OBSERVER
-  // =========================================================================
-  function initScrollReveal() {
-    const revealElements = document.querySelectorAll('.reveal');
-    if (!revealElements.length) return;
-
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
-    revealElements.forEach(el => revealObserver.observe(el));
-  }
-
-  // =========================================================================
-  // 13. FAQ ACCORDION HANDLER
+  // 15. FAQ ACCORDION
   // =========================================================================
   function initFaqAccordion() {
     const faqItems = document.querySelectorAll('.faq-item');
@@ -783,20 +961,232 @@
       header.addEventListener('click', () => {
         const isActive = item.classList.contains('active');
 
-        // Close all items
         faqItems.forEach(otherItem => {
           otherItem.classList.remove('active');
           const otherHeader = otherItem.querySelector('.faq-header');
           if (otherHeader) otherHeader.setAttribute('aria-expanded', 'false');
         });
 
-        // Toggle clicked item
         if (!isActive) {
           item.classList.add('active');
           header.setAttribute('aria-expanded', 'true');
         }
       });
     });
+  }
+
+  // =========================================================================
+  // 16. BESPOKE SCROLL REVEAL OBSERVER
+  // =========================================================================
+  function initScrollReveal() {
+    const revealElements = document.querySelectorAll('.reveal, .reveal-wipe, .reveal-heading');
+    if (!revealElements.length) return;
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+  }
+
+  // =========================================================================
+  // 17. NEW OFFICE GRAND OPENING MODAL & CELEBRATION VECTORS
+  // Active when visit time < September 14, 2026 11:00 PM IST
+  // =========================================================================
+  function initGrandOpeningModal() {
+    const modal = document.getElementById('opening-modal');
+    const closeBtn = document.getElementById('opening-modal-close');
+    const celebrateBtn = document.getElementById('celebrate-again-btn');
+    if (!modal) return;
+
+    // Cutoff time: 14-09-2026 at 11:00 PM (23:00:00) IST
+    const cutoffTime = new Date('2026-09-14T23:00:00+05:30').getTime();
+    // Welcome time: 14-09-2026 at 11:00 AM (11:00:00) IST
+    const eventStartTime = new Date('2026-09-14T11:00:00+05:30').getTime();
+
+    const now = new Date().getTime();
+
+    // Verification check: Only active if current time < 14-09-2026 11:00 PM
+    if (now >= cutoffTime) {
+      return;
+    }
+
+    const hoursEl = document.getElementById('countdown-hours');
+    const minsEl = document.getElementById('countdown-minutes');
+    const secsEl = document.getElementById('countdown-seconds');
+    const countdownContainer = document.getElementById('opening-countdown');
+
+    function updateCountdown() {
+      const currentTime = new Date().getTime();
+      const diff = eventStartTime - currentTime;
+
+      if (diff > 0) {
+        const totalHours = Math.floor(diff / (1000 * 60 * 60));
+        const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+        if (hoursEl) hoursEl.textContent = String(totalHours).padStart(2, '0');
+        if (minsEl) minsEl.textContent = String(mins).padStart(2, '0');
+        if (secsEl) secsEl.textContent = String(secs).padStart(2, '0');
+      } else {
+        // Happening today past 11 AM IST
+        if (countdownContainer) {
+          countdownContainer.innerHTML = '<div style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 800; color: #10b981; text-align: center; width: 100%;">🎉 GRAND OPENING IS LIVE TODAY! WELCOME TO ALL!</div>';
+        }
+      }
+    }
+
+    updateCountdown();
+    const countdownTimer = setInterval(updateCountdown, 1000);
+
+    // Show on every visit with a brief delay for smooth appearance
+    setTimeout(() => {
+      modal.classList.add('active');
+      launchCelebrationVectors();
+      refreshLucideIcons();
+    }, 650);
+
+    function closeModal() {
+      modal.classList.remove('active');
+      clearInterval(countdownTimer);
+    }
+
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('active')) {
+        closeModal();
+      }
+    });
+
+    if (celebrateBtn) {
+      celebrateBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        launchCelebrationVectors();
+      });
+    }
+  }
+
+  // High-performance canvas celebration vectors & confetti streamer cannon
+  function launchCelebrationVectors() {
+    const canvas = document.getElementById('celebration-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
+
+    const onResize = () => {
+      if (!canvas) return;
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    };
+    window.addEventListener('resize', onResize);
+
+    const colors = [
+      '#10B981', // Electric Emerald
+      '#024F16', // Forest Green
+      '#0E793C', // Brand Green
+      '#F59E0B', // Festive Gold
+      '#FCD34D', // Amber Highlight
+      '#34D399', // Mint
+      '#FFFFFF'  // Specular White
+    ];
+
+    const particles = [];
+    const particleCount = 120;
+
+    // Throw celebratory vectors from bottom-left and bottom-right bursting upwards
+    for (let i = 0; i < particleCount; i++) {
+      const fromLeft = i % 2 === 0;
+      const originX = fromLeft ? width * 0.12 : width * 0.88;
+      const originY = height * 0.84;
+      const angle = fromLeft
+        ? -Math.PI * 0.35 + (Math.random() - 0.5) * 0.65
+        : -Math.PI * 0.65 + (Math.random() - 0.5) * 0.65;
+      const speed = 15 + Math.random() * 20;
+
+      particles.push({
+        x: originX,
+        y: originY,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        sizeW: 8 + Math.random() * 10,
+        sizeH: 14 + Math.random() * 20,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        rotation: Math.random() * 360,
+        rotSpeed: (Math.random() - 0.5) * 16,
+        drag: 0.985,
+        gravity: 0.38,
+        alpha: 1,
+        fadeSpeed: 0.005 + Math.random() * 0.007,
+        isBar: Math.random() > 0.35
+      });
+    }
+
+    let animId;
+    function render() {
+      ctx.clearRect(0, 0, width, height);
+
+      let activeCount = 0;
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        if (p.alpha <= 0) continue;
+        activeCount++;
+
+        p.vx *= p.drag;
+        p.vy = p.vy * p.drag + p.gravity;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.rotation += p.rotSpeed;
+        p.alpha -= p.fadeSpeed;
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate((p.rotation * Math.PI) / 180);
+        ctx.globalAlpha = Math.max(0, p.alpha);
+        ctx.fillStyle = p.color;
+
+        if (p.isBar) {
+          // Celebration bar / ribbon vector
+          ctx.fillRect(-p.sizeW / 2, -p.sizeH / 2, p.sizeW, p.sizeH);
+          ctx.strokeStyle = '#FFFFFF';
+          ctx.lineWidth = 0.5;
+          ctx.strokeRect(-p.sizeW / 2, -p.sizeH / 2, p.sizeW, p.sizeH);
+        } else {
+          // Celebration diamond sparkler
+          ctx.beginPath();
+          ctx.moveTo(0, -p.sizeH / 2);
+          ctx.lineTo(p.sizeW / 2, 0);
+          ctx.lineTo(0, p.sizeH / 2);
+          ctx.lineTo(-p.sizeW / 2, 0);
+          ctx.closePath();
+          ctx.fill();
+        }
+
+        ctx.restore();
+      }
+
+      if (activeCount > 0) {
+        animId = requestAnimationFrame(render);
+      } else {
+        ctx.clearRect(0, 0, width, height);
+        window.removeEventListener('resize', onResize);
+        cancelAnimationFrame(animId);
+      }
+    }
+
+    render();
   }
 
 })();

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 70" width="340" height="70" fill="none">
+  <!-- Brand Symbol / High-Voltage Circuit Mark (Dark Mode: White & Luminous Emerald) -->
+  <g id="logo-mark" transform="translate(6, 5)">
+    <!-- Circuit backdrop glow & nodes (#0E793C & #10B981) -->
+    <circle cx="10" cy="18" r="2.5" fill="#10B981" opacity="0.85"/>
+    <line x1="10" y1="18" x2="22" y2="18" stroke="#10B981" stroke-width="1.5" stroke-dasharray="2 2" opacity="0.65"/>
+    <circle cx="48" cy="50" r="2" fill="#0E793C" opacity="0.9"/>
+    <line x1="38" y1="50" x2="48" y2="50" stroke="#0E793C" stroke-width="1.5" opacity="0.75"/>
+
+    <!-- P Stem (Deep Industrial Forest Green: #024F16) -->
+    <path d="M14 6 C14 3.79 15.79 2 18 2 H35 C46.046 2 55 10.954 55 22 C55 33.046 46.046 42 35 42 H26 V56 C26 58.21 24.21 60 22 60 H18 C15.79 60 14 58.21 14 56 V6 Z" fill="#024F16" stroke="#0E793C" stroke-width="1"/>
+    
+    <!-- P Inner Negative Space (Cutout) -->
+    <path d="M26 12 H34 C39.523 12 44 16.477 44 22 C44 27.523 39.523 32 34 32 H26 V12 Z" fill="#0A130E"/>
+
+    <!-- Dynamic High-Voltage Lightning Bolt (Vibrant Emerald Green: #10B981) -->
+    <path d="M48 3 L20 30 H32 L16 57 L44 26 H31 L48 3 Z" fill="#10B981" filter="drop-shadow(0 2px 6px rgba(16, 185, 129, 0.6))"/>
+    
+    <!-- Inner High-Voltage Flash Accent (Luminous Mint Highlight: #6EE7B7) -->
+    <path d="M38 10 L25 28 H33 L23 48 L40 25 H30 L38 10 Z" fill="#6EE7B7" opacity="0.9"/>
+  </g>
+
+  <!-- Wordmark & Subtitle (High Contrast on Midnight Pine Background) -->
+  <g id="logo-text" transform="translate(74, 12)">
+    <!-- Primary Brand Title: Space Grotesk / Sora -->
+    <text x="0" y="25" font-family="'Space Grotesk', 'Sora', -apple-system, BlinkMacSystemFont, sans-serif" font-size="23" font-weight="800" letter-spacing="-0.5" fill="#FFFFFF">
+      POWER <tspan fill="#10B981">SOLUTIONS</tspan>
+    </text>
+    
+    <!-- Govt Certified Subtitle -->
+    <text x="1" y="42" font-family="'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif" font-size="9" font-weight="700" letter-spacing="1.8" fill="#A7F3D0">
+      CLASS "A" LICENSED CONTRACTOR
+    </text>
+
+    <!-- Emerald Certification Live Node -->
+    <circle cx="216" cy="39" r="3" fill="#10B981" filter="drop-shadow(0 0 5px #10B981)"/>
+  </g>
+</svg>
